@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style>
+/* 0. body 배경색 설정 */
+body {
+    background-color: #CBCBCB;
+    margin: 0;
+}
+/* 1. nav-table 스타일 */
+.nav-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+/* 2. 모든 테이블 요소의 테두리 기본 제거 및 패딩 */
+table, tr, th, td {
+    border: none;
+    padding: 12px 8px; 
+}
+/* 3. 상단 내비게이션 테이블 테두리 */
+.nav-table,
+.nav-table tr,
+.nav-table td {
+    border: solid 1px black;
+}
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: #2a406c;
+}
+
+/* 4. 메인 콘텐츠 (이미지+플레이리스트) 레이아웃 */
+.main-content {
+    display: flex;
+    gap: 30px; 
+    align-items: flex-start;
+    padding: 20px;
+}
+.playlist-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.playlist-table-container table,
+.playlist-table-container tr,
+.playlist-table-container td {
+    border: none;
+    padding: 10px 0;
+    vertical-align: middle;
+}
+.playlist-table-container td:first-child {
+    padding-right: 20px;
+    width: 250px; /* 앨범 이미지 영역 너비 고정 */
+}
+
+/* ⭐ 핵심 수정 1: 곡 제목 셀 너비 고정 (쏠림 방지) */
+.playlist-table-container td:nth-child(2) {
+    width: 300px; /* 곡 제목을 담을 충분한 공간 확보 */
+    text-align: left;
+}
+
+/* ⭐ 핵심 수정 2: 아티스트 셀 간격 확보 및 줄바꿈 방지 */
+.a {
+    font-weight:bold;
+    color:rgb(92, 92, 92);
+    text-align: left;
+    /* padding-left/right 대신 width를 늘려 공간을 확보합니다. */
+    width: 220px; /* 아티스트 이름을 충분히 표시하고 간격도 확보할 수 있는 너비 (필요하면 250px까지 늘릴 수 있음) */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 유지 (이것이 중요함) */
+}
+
+/* 2. 오디오 바 셀은 여백 역할을 하므로 padding-right를 추가합니다. */
+.playlist-table-container td:last-child {
+    text-align: right;
+    width: 280px; /* 오디오 바가 들어갈 공간 고정 */
+    padding-left: 50px; /* ⭐⭐ 아티스트 셀과의 최종 간격을 벌려주는 여백 추가 ⭐⭐ */
+}
+
+/* 오디오 플레이어의 너비를 셀에 맞춤 */
+audio {
+    width: 100%;
+    min-width: 200px;
+    
+}
+.b {
+        font-weight:bold;
+    }
+    .playlist-table-container {
+    /* 테이블 컨테이너를 중앙에 정렬하고 배경색을 추가하여 가독성 높임 (선택 사항) */
+    background-color: #DEDEDE;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.playlist-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.playlist-table-container table,
+.playlist-table-container tr,
+.playlist-table-container td {
+    border: none;
+    padding: 10px 0;
+    vertical-align: middle;
+}
+.playlist-table-container td:first-child {
+    padding-right: 20px;
+    width: 250px; /* 앨범 이미지 영역 너비 고정 */
+}
+</style>
+</head>
+<body>
+ <body bgcolor="#CBCBCB"></body>
+    <table class="nav-table">
+        <tr>
+            <td><a href="index.html">My Daily music</a></td>
+            <td><a href="Mornig song.html">Morning song</a></td>
+            <td><a href="Night song.html">Night song</a></td>
+            <td><a href="Energy.html">Energy</a></td>
+            <td><a href="Heling.html">Healing</a></td>
+            <td><a href="Singer.html">Singer</a></td>
+        </tr>
+    </table>
+    <h1 style="text-align: center;">Singer</h1>
+    <h3 style="text-align: center;">자주듣는 가수들의 다른 노래들</h3>
+    
+    
+        <div class="main-content">
+                <img src="gif.gif" alt="움직이는 이미지" width="425" height="700">
+        
+        <div class="playlist-table-container"> 
+            <table>
+                <tr>
+                    <td> <img src="데이식스.png" width="250" height="150"></td>
+                    <td class="b">Welcome to the Show<br><br>예뻤어</td>
+                    <td class="a">DAY6<br>(데이식스)</td>
+                    <td><audio src="DAY6 (데이식스) 'Welcome to the Show' Official Audio - JXS_BP Official.mp3" controls loop class="full-width-audio"></audio><br><br><audio src="c:\Users\user\Music\DAY6(데이식스)- 예뻤어 [가사_Lyrics] - 웅키.mp3" controls loop class="full-width-audio"></audio> </td>
+                </tr>
+                <tr>
+                    <td> <img src="나토리.png" width="250" height="150"></td>
+                    <td class="b">IN MY HEAD<br><br>Overdose</td>
+                    <td class="a">나토리</td>
+                    <td class="a"><audio src="c:\Users\user\Music\なとり - IN_MY_HEAD - なとり _ natori.mp3" controls loop class="full-width-audio"></audio><br><br><audio src="c:\Users\user\Music\なとり - Overdose - なとり _ natori.mp3" controls loop class="full-width-audio"></audio></td>
+                </tr>
+                <tr> <td><img src="악동뮤지션.jpg" width="250" height="150"></td>
+                    <td class="b">어떻게 이별까지 사랑하겠어, 널 사랑하는 거지<br><br>RE-BYE</td>
+                    <td class="a">악동뮤지션</td>
+                    <td class="a"><audio src="c:\Users\user\Music\AKMU - '어떻게 이별까지 사랑하겠어, 널 사랑하는 거지(How can I love the heartbreak, youre the one I love)' M_V - AKMU.mp3" controls loop class="full-width-audio"></audio><br><br><audio src="c:\Users\user\Music\AKMU(악뮤) - RE-BYE [가사_Lyrics] - 웅키.mp3" controls loop class="full-width-audio"></audio>
+                <tr>
+                    <td> <img src="잔나비.png" width="250" height="150"></td>
+                    <td class="b">사랑하긴 했었나요...</td>
+                    <td class="a">잔나비</td>
+                    <td><audio src="Baby I need you (사랑하긴 했었나요 스쳐가는 인연이었나요 짧지않은 우리... - JANNABI.mp3" controls loop class="full-width-audio"></audio> </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
