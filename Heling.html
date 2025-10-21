@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Daily Music - Healing</title>
+    <style>
+/* 0. body 배경색 설정 */
+body {
+    background-color: #CBCBCB;
+    margin: 0;
+}
+/* 1. nav-table 스타일 */
+.nav-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+/* 2. 모든 테이블 요소의 테두리 기본 제거 및 패딩 */
+table, tr, th, td {
+    border: none;
+    padding: 12px 8px; 
+}
+/* 3. 상단 내비게이션 테이블 테두리 */
+.nav-table,
+.nav-table tr,
+.nav-table td {
+    border: solid 1px black;
+}
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: #2a406c;
+}
+
+/* ------------------------------------------- */
+/* 비디오 플레이어 중앙 정렬 및 크기 설정 */
+.main-video-player {
+    width: 80%; /* 비디오 플레이어 너비 */
+    max-width: 800px; /* 너무 커지지 않도록 최대 너비 설정 */
+    height: auto;
+    margin: 0 auto 30px; /* 중앙 정렬 및 아래쪽 여백 */
+    display: block; /* 중앙 정렬을 위한 필수 설정 */
+}
+/* ------------------------------------------- */
+
+/* 4. 메인 콘텐츠 레이아웃 */
+/* main-content에서 flex는 제거하고, 중앙 정렬을 위해 max-width와 margin을 사용합니다. */
+.main-content {
+    max-width: 1200px; /* 최대 너비를 지정하여 콘텐츠가 너무 넓어지는 것을 방지 */
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 20px;
+    /* display: flex; gap: 30px; align-items: flex-start;는 제거 */
+}
+
+/* 플레이리스트 테이블 컨테이너 스타일 */
+.playlist-table-container {
+    /* 테이블 컨테이너를 중앙에 정렬하고 배경색을 추가하여 가독성 높임 (선택 사항) */
+    background-color: #DEDEDE;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.playlist-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.playlist-table-container table,
+.playlist-table-container tr,
+.playlist-table-container td {
+    border: none;
+    padding: 10px 0;
+    vertical-align: middle;
+}
+.playlist-table-container td:first-child {
+    padding-right: 20px;
+    width: 250px; /* 앨범 이미지 영역 너비 고정 */
+}
+
+/* ⭐ 핵심 수정 1: 곡 제목 셀 너비 고정 (쏠림 방지) */
+.playlist-table-container td:nth-child(2) {
+    width: 300px; /* 곡 제목을 담을 충분한 공간 확보 */
+    text-align: left;
+}
+
+/* ⭐ 핵심 수정 2: 아티스트 셀 간격 확보 및 줄바꿈 방지 */
+.a {
+    font-weight:bold;
+    color:rgb(92, 92, 92);
+    text-align: left;
+    /* padding-left/right 대신 width를 늘려 공간을 확보합니다. */
+    width: 220px; /* 아티스트 이름을 충분히 표시하고 간격도 확보할 수 있는 너비 (필요하면 250px까지 늘릴 수 있음) */
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 유지 (이것이 중요함) */
+}
+
+/* 오디오 바 셀 */
+.playlist-table-container td:last-child {
+    text-align: right;
+    width: 280px; /* 오디오 바가 들어갈 공간 고정 */
+    padding-left: 50px; /* 아티스트 셀과의 최종 간격을 벌려주는 여백 추가 */
+}
+
+/* 오디오 플레이어의 너비를 셀에 맞춤 */
+audio {
+    width: 100%;
+    min-width: 200px;
+}
+.b {
+    font-weight:bold;
+}
+.main-video-player {
+    width: 80%; /* 비디오 플레이어 너비 */
+    max-width: 800px; /* 너무 커지지 않도록 최대 너비 설정 */
+    height: 450px; /* 🚨 높이를 강제 지정하여 플레이어가 반드시 보이도록 함 */
+    margin: 0 auto 30px; /* 중앙 정렬 및 아래쪽 여백 */
+    display: block; /* 중앙 정렬을 위한 필수 설정 */
+    background-color: black; /* 영상이 로드되기 전 배경색 */
+}
+</style>
+</head>
+<body>
+    <table class="nav-table">
+        <tr>
+            <td><a href="index.html">My Daily music</a></td>
+            <td><a href="Mornig song.html">Morning song</a></td>
+            <td><a href="Night song.html">Night song</a></td>
+            <td><a href="Energy.html">Energy</a></td>
+            <td><a href="Healing.html" style="color: #2a406c; font-weight: bold;">Healing</a></td>
+            <td><a href="Singer.html">Singer</a></td>
+        </tr>
+    </table>
+    <h1 style="text-align: center;">Healing</h1>
+    <h3 style="text-align: center;">힐링받고 싶을 때 듣는 플레이리스트</h3>
+    
+    <div class="main-content">
+        <video controls loop class="main-video-player" poster="비디오_썸네일_경로.jpg">
+            <source src="KakaoTalk_20251021_234117669.mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="playlist-table-container"> 
+            <table>
+                <tr>
+                    <td> <img src="비밀.png" width="250" height="150" alt="비밀 앨범 이미지"></td>
+                    <td class="b">비밀의 화원</td>
+                    <td class="a">악동뮤지션</td>
+                    <td><audio src="Secret Garden (비밀의 화원) - IU.mp3" controls loop class="full-width-audio"></audio> </td>
+                </tr>
+                <tr>
+                    <td> <img src="비밀.png" width="250" height="150" alt="비밀 앨범 이미지"></td>
+                    <td class="b">잠 못 드는 밤 비는 내리고</td>
+                    <td class="a">아이유</td>
+                    <td><audio src="Sleepless rainy night (잠 못 드는 밤 비는 내리고) - IU.mp3" controls loop class="full-width-audio"></audio> </td>
+                </tr>
+                <tr>
+                    <td> <img src="해피.png" width="250" height="150" alt="붉은 노을 앨범 이미지"></td>
+                    <td class="b">HAPPY</td>
+                    <td class="a">DAY6<br>(데이식스)</td>
+                    <td><audio src="DAY6 HAPPY Lyric Video - DAY6.mp3" controls loop class="full-width-audio"></audio> </td>
+                </tr>
+                <tr>
+                    <td> <img src="주저하는연인.png" width="250" height="150" alt="Next Level 앨범 이미지"></td>
+                    <td class="b">사랑하긴했었나요 스</td>
+                    <td class="a">잔나비</td>
+                    <td><audio src="잔나비 (JANNABI) - 주저하는 연인들을 위해 (For Lovers Who Hesitate)  가사 - Hello, My Music Player.mp3" controls loop class="full-width-audio"></audio></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
