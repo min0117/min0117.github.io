@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ <style>
+table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse; /* 테이블 경계선 합치기 */
+}
+
+/* 2. 모든 테이블 요소의 테두리 기본 제거 */
+table, tr, th, td {
+    border: none;
+    padding: 8px;
+}
+/* 1. nav-table 스타일 (테이블 레이아웃) */
+.nav-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+/* 2. 모든 테이블 요소의 테두리 기본 제거 및 패딩 (이것은 nav-table에만 영향을 주지 않습니다) */
+table, tr, th, td {
+    border: none;
+    padding: 12px 8px; 
+}
+
+/* 3. 상단 내비게이션 테이블 테두리 (nav-table에만 적용) */
+.nav-table,
+.nav-table tr,
+.nav-table td {
+    border: solid 1px black;
+}
+
+/* 4. 링크 스타일 */
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: #2a406c;
+}
+
+/* 5. body 마진 제거 (내비게이션 바가 화면을 꽉 채우도록) */
+body {
+    margin: 0; 
+    /* background-color: #CBCBCB; 도 포함되지만, 네비게이션 레이아웃 관련 주요 스타일은 마진 제거입니다. */
+}
+/* ------------------------------------------------ */
+
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: #2a406c;
+}
+
+.main-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.card-list {
+    background-color: #DEDEDE;
+    padding: 20px;
+    border-radius: 15px;
+    flex-grow: 1;
+}
+
+/* 4. 플레이리스트 테이블 (.card-list 내부 테이블) 스타일 */
+.card-list table {
+    width: 100%;
+    text-align: left;
+    /* border: none; 이 .card-list table에는 이미 적용되어 테두리가 제거됩니다. */
+}
+
+.card-list table,
+.card-list tr,
+.card-list td {
+    border: none; /* 플레이리스트 테이블의 테두리 명확히 제거 */
+    padding: 10px 0;
+}
+
+.card-list td:first-child {
+    width: 60px;
+    padding-right: 10px;
+    vertical-align: top;
+}
+.main-content {
+    display: flex; 
+    gap: 30px; 
+    /* align-items: flex-start; 대신 stretch를 사용하거나 
+       이미지 자체에 높이를 100%로 설정합니다. */
+    align-items: flex-start; /* 기존값 유지 */
+    padding: 20px; 
+}
+
+/* 2. 🌟 GIF 이미지 높이를 부모(.main-content) 내에서 100%로 설정 🌟 */
+.main-content img {
+    /* HTML 속성 대신 CSS로 높이를 100%로 설정 */
+    height: 100%; 
+    
+    /* 너비는 그대로 유지하거나 조정 */
+    /* width: 550px; (기존 HTML 속성) */
+    
+    /* 🌟 중요: 이미지 비율이 깨지는 것을 방지합니다. 🌟 */
+    object-fit: cover; 
+}
+.main-content {
+    display: flex;
+    gap: 30px;
+    /* 내부 요소들이 컨테이너의 높이를 채우도록 stretch를 사용 */
+    align-items: stretch; 
+    padding: 20px;
+}
+</style>
+</head>
+<body>
+    <body bgcolor="#CBCBCB"></body>
+    <table class="nav-table">
+        <tr>
+            <td><a href="index.html">My Daily music</a></td>
+            <td><a href="Mornig song.html">Morning song</a></td>
+            <td><a href="Night song.html">Night song</a></td>
+            <td><a href="Energy.html">Energy</a></td>
+            <td><a href="Healing.html">Healing</a></td>
+            <td><a href="Singer.html">Singer</a></td>
+        </tr>
+    </table>
+    <h1>My Daily music</h1>
+     <h3>하루를 채우는 사운드</h3>
+
+    <div class="main-content">
+        <img src="gif.gif" alt="움직이는 이미지" width="500" height="50">
+        
+        <div class="card-list"> <table>
+                <tr>
+                    <td><img src="sun.png" width="70" height="70"></td>
+                    <td>Morning song<br>활기찬 아침을 위한 플레이리스트</td>
+            
+                    <td><img src="moon.png" width="70" height="70"></td>
+                    <td>Night song<br>깊은 밤을 위한 플레이리스트</td>
+                </tr>
+                <tr>
+                    <td><img src="book.png" width="70" height="70"></td>
+                    <td>Study Flow<br>공부 집중력을 위한 플레이리스트</td>
+                
+                    <td><img src="coffe.png" width="70" height="70"></td>
+                    <td>Healing<br>힐링을 위한 플레이리스트</td>
+                </tr>
+                <tr>
+                    <td><img src="Singer.png" width="70" height="70"></td>
+                    <td>Singer<br>가수소개</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
