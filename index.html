@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMD 메인</title>
+    <style>
+        /* ---------- 전체 배경 ---------- */
+        body{
+            padding: 0;
+            margin: 0;
+            font-family: "Noto Sans KR", sans-serif;
+
+            background-image: url("학교.jpg");   /* 배경 이미지 파일명 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        li{
+            list-style-type: none;
+        }
+
+        /* ---------- 헤더 (반투명 + 블러) ---------- */
+        header {
+            background-color: rgba(61, 61, 61, 0.6);
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            box-sizing: border-box;
+            backdrop-filter: blur(4px);
+        }
+
+
+#logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: inherit; /* 글씨 크기 유지 */
+}
+#logo,
+#logo:link,
+#logo:visited,
+#logo:hover,
+#logo:active {
+    color: #ffffff;        /* 항상 흰색 유지 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+#logo h4 {
+    font-size: 20px;
+    color: #ffffff;
+    margin: 0;
+}
+
+        #menu {
+            display: flex;
+            gap: 10px;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+        }
+
+        #menu li {
+            display: inline-block;
+        }
+
+        /* ---------- 네비게이션 (반투명 바) ---------- */
+        .item {
+            margin: 15px 20px 0 20px;
+        }
+
+   nav {
+        text-align: center;
+        height: 50px;
+        width: 100%;
+        background-color: rgba(113, 113, 113, 0.45);
+        backdrop-filter: blur(4px);
+    }
+
+    nav ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    nav li {
+        display: inline-block;
+        margin-top: 15px;
+        margin-left: 20px;
+    }
+
+    /* 기본 네비 링크 색 */
+    .item a:link,
+    .item a:visited{
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    /* hover */
+    .item a:hover{
+        text-decoration: none;
+        color: #c3513d;
+    }
+
+    /* ⭐ active(현재 페이지) – 글씨 두껍게 + 색 변경 */
+    .item.active a{
+        color: #c3513d;
+        font-weight: 700;
+    }
+
+
+        /* ---------- HERO 전체 영역 ---------- */
+.hero-section{
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 150px); /* ⭐ 화면 높이에서 헤더+네비 만큼 뺀 값 */
+    display: flex;
+    justify-content: center;     /* 가로 가운데 */
+    align-items: center;         /* 세로 가운데 */
+    margin-top: 0;
+}
+
+
+/* 어두운 오버레이 (배경 살짝 어둡게 + 가독성↑) */
+/*.hero-overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}*/
+
+/* D: 반투명 + 블러 박스 (글씨 뒤 카드 느낌) */
+        .hero-box{
+            max-width: 900px;
+            padding: 35px 60px;
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+            backdrop-filter: blur(10px);
+        }
+
+/* hero 내용 */
+.hero{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* 정말 크게 박히는 DMD */
+.hero-title{
+    font-size: 90px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 3px;
+    margin: 0 0 25px 0;
+    text-shadow: 4px 4px 14px rgba(0,0,0,0.8);
+}
+
+/* 설명 문단 – 강한 그림자 */
+.hero-desc{
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 1.7;
+    max-width: 900px;
+    margin: 0;
+    text-shadow: 4px 4px 12px rgba(0,0,0,0.85);
+}
+
+/* ---------- 푸터 기본 형태 (A타입) ---------- */
+.footer {
+    width: 100%;
+    background-color: rgba(20, 20, 20, 0.85);
+    color: #ffffff;
+    padding: 30px 0;             /* 위아래 여백 */
+    text-align: left;             /* ✔ 왼쪽 정렬 */
+    padding-left: 40px;           /* ✔ 전체 좌측 여백 통일 */
+    box-sizing: border-box;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer li {
+    padding: 4px 0;               /* 줄 간격 통일 */
+    font-size: 14px;
+}
+
+.footer li strong {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.space {
+    height: 250px;   /* 원하는 만큼 조절: 600~1200px */
+}
+#menu a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#menu a:hover {
+    color: #ffeb7c;   /* 네비 hover와 비슷한 색 */
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <a href="index.html" id="logo">
+    <img src="로고.png" width="90px" alt="DMD 로고">
+    <h4>계원예술대학교</h4>
+    </a>
+
+    <ul id="menu">
+    <li><a href="index.html" target="_self">HOME</a></li>
+    <li>|</li>
+    <li><a href="https://www.youtube.com/@KaywonUniversity" target="_blank">유튜브</a></li>
+    <li>|</li>
+    <li><a href="https://www.instagram.com/kaywon_univ/" target="_blank">인스타그램</a></li>
+    </ul>
+
+    </header>
+
+    <!-- 네비게이션 -->
+    <nav>
+        <ul>
+            <li class="item"><a href="curriculum.html">커리큘럼</a></li>
+            <li class="item"><a href="program.html">사용 프로그램</a></li>
+            <li class="item"><a href="work.html">수업 작품들</a></li>
+            <li class="item"><a href="cafa.html">근처 맛집, 카페</a></li>
+            <li class="item"><a href="Tips.html">생활 꿀팁</a></li>
+        </ul>
+    </nav>
+
+    <!-- D: 오버레이 + 블러 박스 + 강한 그림자 적용한 HERO -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+
+        <div class="hero">
+            <div class="hero-box">
+                <h1 class="hero-title">DMD</h1>
+                <p class="hero-desc">
+                    디지털미디어 산업의 글로벌 트렌드는 사물 인터넷, 웨어러블 디바이스,
+                    인공지능, 스마트 헬스케어, 스마트 홈, 가상현실 및 증강현실 등으로서
+                    의식주 전반에서 디자인 사고와 IT기술을 융합할 수 있는
+                    창조적·혁신적 역량을 가진 인재를 요구하고 있다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="space"></div>
+
+    <!-- 푸터 -->
+   <footer class="footer">
+    <ul>
+        <li><strong>계원예술대학교 DMD</strong></li>
+        <li>경기도 의왕시 계원대학로 66</li>
+        <li>디지털미디어디자인학과 학과사무실 TEL : 031-420-1890 | Email : dmd@kaywon.ac.kr</li>
+        <li>© 2025 Kaywon University of Arts. All rights reserved.</li>
+    </ul>
+</footer>
+</body>
+</html>
+

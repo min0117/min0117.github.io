@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMD 주변 카페 – 남매카페</title>
+
+    <style>
+    /* ===== 기본 세팅 ===== */
+    *{ box-sizing:border-box; }
+    body{
+        margin:0;
+        padding:0;
+        font-family:"Noto Sans KR", sans-serif;
+        background:#f5f5f5;
+    }
+    li{ list-style-type:none; }
+
+    /* ===== 헤더 (공통) ===== */
+    header {
+        background-color: rgba(61, 61, 61, 0.6);
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+        box-sizing: border-box;
+        backdrop-filter: blur(4px);
+    }
+
+    #logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: inherit;
+    }
+    #logo,
+    #logo:link,
+    #logo:visited,
+    #logo:hover,
+    #logo:active {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    #logo h4 {
+        font-size: 20px;
+        color: #ffffff;
+        margin: 0;
+    }
+
+    /* 헤더 오른쪽 메뉴 */
+    #menu {
+        display: flex;
+        gap: 10px;
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        color: #ffffff;
+    }
+    #menu li { display:inline-block; }
+    #menu a {
+        color:#ffffff;
+        text-decoration:none;
+    }
+    #menu a:hover { color:#ffeb7c; }
+
+    /* ===== 상단 네비 (공통) ===== */
+    .item { margin:15px 20px 0 20px; }
+
+    nav{
+        text-align:center;
+        height:50px;
+        width:100%;
+        background-color:rgba(113,113,113,0.45);
+        backdrop-filter:blur(4px);
+    }
+    nav ul{
+        padding:0;
+        margin:0;
+    }
+    nav li{
+        display:inline-block;
+        margin-top:15px;
+        margin-left:20px;
+    }
+
+    .item a:link,
+    .item a:visited{
+        text-decoration:none;
+        color:#ffffff;
+    }
+    .item a:hover{
+        text-decoration:none;
+        color:#c3513d;
+    }
+
+    /* 현재 페이지(active) */
+    .item.active a{
+        color:#c3513d;
+        font-weight:700;
+    }
+
+    /* ===== 메인 레이아웃 (카페 페이지용) ===== */
+    .cafe-page-wrap{
+        max-width:1200px;
+        margin:60px auto 80px auto;
+        display:flex;
+        align-items:flex-start;
+        gap:32px;
+    }
+
+    /* 왼쪽 카페 목록 */
+    .cafe-menu{
+        width:200px;
+        flex-shrink:0;
+    }
+
+    .cafe-menu-title{
+        font-size:18px;
+        font-weight:700;
+        margin:0 0 12px 0;
+        color:#333;
+    }
+
+    .cafe-menu a{
+        display:block;
+        width:100%;
+        background:#e5e5e5;
+        padding:8px 10px;
+        margin-top:7px;
+        color:#555;
+        text-decoration:none;
+        border-radius:4px;
+        font-size:14px;
+    }
+    .cafe-menu a:hover{
+        background:#d3d3d3;
+        color:#c3513d;
+        font-weight:600;
+    }
+    .cafe-menu a.active{
+        background:#c3513d;
+        color:#fff;
+        font-weight:700;
+    }
+
+    /* 가운데 내용 */
+    .cafe-main{
+        flex:1;
+        min-width:0;
+        background:#ffffff;
+        padding:24px 26px;
+        border-radius:10px;
+        box-shadow:0 4px 16px rgba(0,0,0,0.08);
+    }
+    .cafe-main h2{
+        margin-top:0;
+        font-size:22px;
+        color:#333;
+    }
+    .cafe-main p{
+        font-size:14px;
+        color:#444;
+        line-height:1.7;
+    }
+
+    /* ===== 오른쪽 사이드바 (sticky 카드) ===== */
+    .sidebar{
+        width:260px;
+        flex-shrink:0;
+        position:sticky;
+        top:120px;              /* 헤더/네비 아래 위치 */
+        align-self:flex-start;
+    }
+
+    .sidebar-card{
+        background:#ffffff;
+        border-radius:12px;
+        padding:18px 16px 20px 16px;
+        box-shadow:0 4px 18px rgba(0,0,0,0.12);
+    }
+
+    .sidebar-card img{
+        width:100%;
+        height:auto;
+        border-radius:8px;
+        margin-bottom:10px;
+    }
+
+    .sidebar-card h3{
+        margin:0 0 6px 0;
+        font-size:16px;
+        font-weight:700;
+        color:#333;
+    }
+
+    .sidebar-card p{
+        font-size:13px;
+        color:#555;
+        line-height:1.5;
+        margin:0 0 8px 0;
+    }
+
+    .sidebar-card a{
+        font-size:13px;
+        color:#c3513d;
+        text-decoration:none;
+    }
+    .sidebar-card a:hover{
+        text-decoration:underline;
+    }
+
+    /* ===== 푸터 (공통) ===== */
+    .footer{
+        width:100%;
+        background-color:rgba(20,20,20,0.85);
+        color:#ffffff;
+        padding:30px 0;
+        text-align:left;
+        padding-left:40px;
+        box-sizing:border-box;
+    }
+    .footer ul{
+        list-style:none;
+        padding:0;
+        margin:0;
+    }
+    .footer li{
+        padding:4px 0;
+        font-size:14px;
+    }
+    .footer li strong{
+        font-size:18px;
+        font-weight:700;
+    }
+
+    /* ===== 반응형 (화면 좁을 때) ===== */
+    @media (max-width:900px){
+        .cafe-page-wrap{
+            flex-direction:column;
+            gap:24px;
+            padding:0 16px;
+        }
+        .cafe-menu,
+        .sidebar{
+            width:100%;
+            position:static;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 공통 헤더 ===== -->
+    <header>
+        <a href="index.html" id="logo">
+            <img src="로고.png" width="90px" alt="DMD 로고">
+            <h4>계원예술대학교</h4>
+        </a>
+
+        <ul id="menu">
+            <li><a href="index.html" target="_self">HOME</a></li>
+            <li>|</li>
+            <li><a href="https://www.youtube.com/@KaywonUniversity" target="_blank">유튜브</a></li>
+            <li>|</li>
+            <li><a href="https://www.instagram.com/kaywon_univ/" target="_blank">인스타그램</a></li>
+        </ul>
+    </header>
+
+    <!-- ===== 공통 네비게이션 ===== -->
+    <nav>
+        <ul>
+            <li class="item"><a href="curriculum.html">커리큘럼</a></li>
+            <li class="item active"><a href="program.html">사용 프로그램</a></li>
+            <li class="item"><a href="work.html">수업 작품들</a></li>
+            <!-- 이 페이지가 '근처 맛집, 카페'니까 active -->
+            <li class="item"><a href="cafa.html">근처 맛집, 카페</a></li>
+            <li class="item"><a href="Tips.html">생활 꿀팁</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== 카페 페이지 메인 레이아웃 ===== -->
+    <div class="cafe-page-wrap">
+
+        <!-- 왼쪽 카페 리스트 -->
+        <aside class="cafe-menu">
+            <h3 class="cafe-menu-title">사용프로그램</h3>
+            <a href="program.html" class="active">어도비</a>
+            <a href="figam.html">피그마</a>
+            <a href="3D.html">3D 블렌더</a>
+            <a href="Visual.html">Visual Studio Code</a>
+        </aside>
+
+        <!-- 가운데 메인 내용 -->
+        <main class="cafe-main">
+            <h1>어도비</h1>
+
+            <h3>포토샵</h3>
+            <img src="포토샵" width="500">
+
+        <p>
+        이미지 보정 · 합성 · 디지털 그래픽 제작의 기본 도구
+
+        포토샵은 디지털 이미지 작업의 표준 프로그램으로, 사진 보정과 합성, 콘텐츠 제작에 널리 활용됩니다.
+        디지털미디어디자인과에서는 다음과 같은 작업을 위해 사용합니다 <br>
+        <b>사진 색감 보정 및 노이즈 제거
+
+        배경 제거/합성, 디지털 페인팅
+
+        웹/앱 디자인용 UI 그래픽 제작
+
+        SNS·광고용 썸네일 및 시각 자료 제작
+
+        포스터 · 배너 · 인쇄물 디자인 </b> <br>
+        
+        “이미지 기반 디자인 작업의 출발점”
+        디자이너로서 기본적으로 다룰 수 있어야 하는 핵심 툴입니다.</p>
+
+           <h3>일러스트</h3>
+            <img src="일러스트.jpg" width="500">
+
+        <p>
+        벡터 기반 로고 · 아이콘 · 인포그래픽 제작의 핵심
+
+        일러스트레이터는 해상도에 영향을 받지 않는 벡터 디자인 프로그램입니다. <br>
+        <b>로고 디자인, 브랜드 아이덴티티 제작
+
+        아이콘 · 심볼 디자인
+
+        캐릭터 일러스트 제작
+
+        인포그래픽, 프레젠테이션용 그래픽 제작
+
+        포스터, 전단 등의 인쇄 레이아웃 구성 </b> <br>
+        
+        “브랜딩과 시각적 정체성을 만드는 도구”
+        기획을 시각적 언어로 표현하는 데 최적화된 프로그램입니다.</p>
+
+            <h3>프리미어 프로</h3>
+            <img src="프리미어 프로.jpg" width="500">
+
+        <p>
+        영상 편집과 연출을 위한 표준 툴
+        프리미어 프로는 영상 편집의 핵심 프로그램으로, 촬영된 영상을 구성하고 컷 편집·색보정·오디오 작업을 수행합니다. <br>
+        <b>
+        과제/프로젝트용 영상 편집
+
+        자막 · 그래픽 · 사운드 믹싱
+
+        색감 보정(Color Grading) 연출
+
+        SNS 콘텐츠 · 모션그래픽 편집</b> <br>
+        
+        “스토리와 메시지를 시각적으로 완성하는 과정”
+        다른 Adobe 프로그램과의 연동성이 뛰어나 효율적으로 작업할 수 있습니다.</p>
+
+        <h3>에프터 이펙트</h3>
+            <img src="에프터 이펙트.jpg" width="500">
+
+        <p>
+        모션 그래픽 · VFX(시각효과)의 중심 프로그램
+
+        After Effects는 영상에 모션, 효과, 애니메이션을 적용하는 모션그래픽 툴입니다. <br>
+        <b>로고 모션그래픽 제작
+
+        UI/UX 프로토타입 애니메이션
+
+        자막 및 그래픽 애니메이션
+
+        파티클 · 빛 효과 · 합성(VFX)
+
+        영화/광고 스타일의 실험적 비주얼 제작
+
+        3D 레이어 기반 공간 연출</b> <br>
+        
+        “정적인 디자인을 살아 움직이게 만드는 도구”
+        창의적인 시각 표현과 실험적 연출이 가능해 학생들이 가장 좋아하는 프로그램 중 하나입니다.</p>
+        
+        </main>
+
+          <!-- 사이드바 -->
+    <div class="page-wrap">
+    <div class="curriculum-wrap">
+        <!-- 교육과정표 내용 -->
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>교육목표</h3>
+            <p>디지털미디어 산업의 글로벌 트렌드는 사물 인터넷, 웨어러블 디바이스, 인공지능, 스마트 헬스케어, 스마트 홈, 가상현실 및 증강현실 등으로서 의식주 전반에서 디자인 사고와 IT기술을 융합할 수 있는 창조적/혁신적 역량을 가진 인재를 요구하고 있다.</p>
+            <img src="사이드1.jpg" alt="DMD 이미지" style="width:100%; height:auto;">
+            <!--<ul class="sidebar-links">
+                <li><a href="#sem1">1-1 · 기초 다지기</a></li>
+                <li><a href="#sem2">1-2 · 프로토타입</a></li>
+                <li><a href="#sem3">2-1 · 프로젝트</a></li>
+                <li><a href="#sem4">2-2 · 포트폴리오</a></li>
+            </ul>-->
+        </div>
+    </aside>
+</div>
+
+    </div>
+
+    <!-- ===== 공통 푸터 ===== -->
+    <footer class="footer">
+        <ul>
+            <li><strong>계원예술대학교 DMD</strong></li>
+            <li>16038 경기도 의왕시 계원대학로 66(내손동)</li>
+            <li>계원예술대학교 대표전화 1899-5823</li>
+            <li>팩스 031-424-7509</li>
+            <li>디지털미디어디자인학과 학과사무실 TEL : 031-420-1890 | E-mail kaywon@kaywon.ac.kr</li>
+            <li>© 2025 Kaywon University of Arts. All rights reserved.</li>
+        </ul>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMD 주변 카페 – 남매카페</title>
+
+    <style>
+    /* ===== 기본 세팅 ===== */
+    *{ box-sizing:border-box; }
+    body{
+        margin:0;
+        padding:0;
+        font-family:"Noto Sans KR", sans-serif;
+        background:#f5f5f5;
+    }
+    li{ list-style-type:none; }
+
+    /* ===== 헤더 (공통) ===== */
+    header {
+        background-color: rgba(61, 61, 61, 0.6);
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 40px;
+        box-sizing: border-box;
+        backdrop-filter: blur(4px);
+    }
+
+    #logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: inherit;
+    }
+    #logo,
+    #logo:link,
+    #logo:visited,
+    #logo:hover,
+    #logo:active {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    #logo h4 {
+        font-size: 20px;
+        color: #ffffff;
+        margin: 0;
+    }
+
+    /* 헤더 오른쪽 메뉴 */
+    #menu {
+        display: flex;
+        gap: 10px;
+        font-size: 14px;
+        margin: 0;
+        padding: 0;
+        color: #ffffff;
+    }
+    #menu li { display:inline-block; }
+    #menu a {
+        color:#ffffff;
+        text-decoration:none;
+    }
+    #menu a:hover { color:#ffeb7c; }
+
+    /* ===== 상단 네비 (공통) ===== */
+    .item { margin:15px 20px 0 20px; }
+
+    nav{
+        text-align:center;
+        height:50px;
+        width:100%;
+        background-color:rgba(113,113,113,0.45);
+        backdrop-filter:blur(4px);
+    }
+    nav ul{
+        padding:0;
+        margin:0;
+    }
+    nav li{
+        display:inline-block;
+        margin-top:15px;
+        margin-left:20px;
+    }
+
+    .item a:link,
+    .item a:visited{
+        text-decoration:none;
+        color:#ffffff;
+    }
+    .item a:hover{
+        text-decoration:none;
+        color:#c3513d;
+    }
+
+    /* 현재 페이지(active) */
+    .item.active a{
+        color:#c3513d;
+        font-weight:700;
+    }
+
+    /* ===== 메인 레이아웃 (카페 페이지용) ===== */
+    .cafe-page-wrap{
+        max-width:1200px;
+        margin:60px auto 80px auto;
+        display:flex;
+        align-items:flex-start;
+        gap:32px;
+    }
+
+    /* 왼쪽 카페 목록 */
+    .cafe-menu{
+        width:200px;
+        flex-shrink:0;
+    }
+
+    .cafe-menu-title{
+        font-size:18px;
+        font-weight:700;
+        margin:0 0 12px 0;
+        color:#333;
+    }
+
+    .cafe-menu a{
+        display:block;
+        width:100%;
+        background:#e5e5e5;
+        padding:8px 10px;
+        margin-top:7px;
+        color:#555;
+        text-decoration:none;
+        border-radius:4px;
+        font-size:14px;
+    }
+    .cafe-menu a:hover{
+        background:#d3d3d3;
+        color:#c3513d;
+        font-weight:600;
+    }
+    .cafe-menu a.active{
+        background:#c3513d;
+        color:#fff;
+        font-weight:700;
+    }
+
+    /* 가운데 내용 */
+    .cafe-main{
+        flex:1;
+        min-width:0;
+        background:#ffffff;
+        padding:24px 26px;
+        border-radius:10px;
+        box-shadow:0 4px 16px rgba(0,0,0,0.08);
+    }
+    .cafe-main h2{
+        margin-top:0;
+        font-size:22px;
+        color:#333;
+    }
+    .cafe-main p{
+        font-size:14px;
+        color:#444;
+        line-height:1.7;
+    }
+
+    /* ===== 오른쪽 사이드바 (sticky 카드) ===== */
+    .sidebar{
+        width:260px;
+        flex-shrink:0;
+        position:sticky;
+        top:120px;              /* 헤더/네비 아래 위치 */
+        align-self:flex-start;
+    }
+
+    .sidebar-card{
+        background:#ffffff;
+        border-radius:12px;
+        padding:18px 16px 20px 16px;
+        box-shadow:0 4px 18px rgba(0,0,0,0.12);
+    }
+
+    .sidebar-card img{
+        width:100%;
+        height:auto;
+        border-radius:8px;
+        margin-bottom:10px;
+    }
+
+    .sidebar-card h3{
+        margin:0 0 6px 0;
+        font-size:16px;
+        font-weight:700;
+        color:#333;
+    }
+
+    .sidebar-card p{
+        font-size:13px;
+        color:#555;
+        line-height:1.5;
+        margin:0 0 8px 0;
+    }
+
+    .sidebar-card a{
+        font-size:13px;
+        color:#c3513d;
+        text-decoration:none;
+    }
+    .sidebar-card a:hover{
+        text-decoration:underline;
+    }
+
+    /* ===== 푸터 (공통) ===== */
+    .footer{
+        width:100%;
+        background-color:rgba(20,20,20,0.85);
+        color:#ffffff;
+        padding:30px 0;
+        text-align:left;
+        padding-left:40px;
+        box-sizing:border-box;
+    }
+    .footer ul{
+        list-style:none;
+        padding:0;
+        margin:0;
+    }
+    .footer li{
+        padding:4px 0;
+        font-size:14px;
+    }
+    .footer li strong{
+        font-size:18px;
+        font-weight:700;
+    }
+
+    /* ===== 반응형 (화면 좁을 때) ===== */
+    @media (max-width:900px){
+        .cafe-page-wrap{
+            flex-direction:column;
+            gap:24px;
+            padding:0 16px;
+        }
+        .cafe-menu,
+        .sidebar{
+            width:100%;
+            position:static;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 공통 헤더 ===== -->
+    <header>
+        <a href="index.html" id="logo">
+            <img src="로고.png" width="90px" alt="DMD 로고">
+            <h4>계원예술대학교</h4>
+        </a>
+
+        <ul id="menu">
+            <li><a href="index.html" target="_self">HOME</a></li>
+            <li>|</li>
+            <li><a href="https://www.youtube.com/@KaywonUniversity" target="_blank">유튜브</a></li>
+            <li>|</li>
+            <li><a href="https://www.instagram.com/kaywon_univ/" target="_blank">인스타그램</a></li>
+        </ul>
+    </header>
+
+    <!-- ===== 공통 네비게이션 ===== -->
+    <nav>
+        <ul>
+            <li class="item"><a href="curriculum.html">커리큘럼</a></li>
+            <li class="item active"><a href="program.html">사용 프로그램</a></li>
+            <li class="item"><a href="work.html">수업 작품들</a></li>
+            <!-- 이 페이지가 '근처 맛집, 카페'니까 active -->
+            <li class="item"><a href="cafa.html">근처 맛집, 카페</a></li>
+            <li class="item"><a href="Tips.html">생활 꿀팁</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== 카페 페이지 메인 레이아웃 ===== -->
+    <div class="cafe-page-wrap">
+
+        <!-- 왼쪽 카페 리스트 -->
+        <aside class="cafe-menu">
+            <h3 class="cafe-menu-title">사용프로그램</h3>
+            <a href="program.html">어도비</a>
+            <a href="figam.html"class="active">피그마</a>
+            <a href="3D.html">3D 블렌더</a>
+            <a href="Visual.html">Visual Studio Code</a>
+        </aside>
+
+        <!-- 가운데 메인 내용 -->
+        <main class="cafe-main">
+            <h1>피그마</h1>
+            <img src="피그마.png" width="500">
+
+        <p>
+        Figma는 웹·앱 화면을 설계할 때 가장 많이 사용하는 UI/UX 디자인 도구
+        웹 기반이라 프로그램 설치 없이 바로 작업할 수 있고, 여러 사람이 동시에 같은 화면을 편집할 수 있는 실시간 협업 기능이 강력하다. <br>
+        <b>와이어프레임 제작
+
+        프로토타입 연결
+
+        사용자 흐름(User Flow) 설계
+
+        디자인 시스템 구성
+        등을 연습하며 실제 서비스 디자인 과정과 동일한 경험을 할 수 있다. </b> <br>
+        
+        “웹·앱 화면을 설계하고 연결하여 실제처럼 테스트할 수 있는 디자인 도구”
+        </p>
+        </main>
+
+          <!-- 사이드바 -->
+    <div class="page-wrap">
+    <div class="curriculum-wrap">
+        <!-- 교육과정표 내용 -->
+    </div>
+
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h3>교육목표</h3>
+            <p>디지털미디어 산업의 글로벌 트렌드는 사물 인터넷, 웨어러블 디바이스, 인공지능, 스마트 헬스케어, 스마트 홈, 가상현실 및 증강현실 등으로서 의식주 전반에서 디자인 사고와 IT기술을 융합할 수 있는 창조적/혁신적 역량을 가진 인재를 요구하고 있다.</p>
+            <img src="사이드1.jpg" alt="DMD 이미지" style="width:100%; height:auto;">
+            <!--<ul class="sidebar-links">
+                <li><a href="#sem1">1-1 · 기초 다지기</a></li>
+                <li><a href="#sem2">1-2 · 프로토타입</a></li>
+                <li><a href="#sem3">2-1 · 프로젝트</a></li>
+                <li><a href="#sem4">2-2 · 포트폴리오</a></li>
+            </ul>-->
+        </div>
+    </aside>
+</div>
+
+    </div>
+
+    <!-- ===== 공통 푸터 ===== -->
+    <footer class="footer">
+        <ul>
+            <li><strong>계원예술대학교 DMD</strong></li>
+            <li>16038 경기도 의왕시 계원대학로 66(내손동)</li>
+            <li>계원예술대학교 대표전화 1899-5823</li>
+            <li>팩스 031-424-7509</li>
+            <li>디지털미디어디자인학과 학과사무실 TEL : 031-420-1890 | E-mail kaywon@kaywon.ac.kr</li>
+            <li>© 2025 Kaywon University of Arts. All rights reserved.</li>
+        </ul>
+    </footer>
+
+</body>
+</html>
