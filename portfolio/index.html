@@ -96,9 +96,9 @@ p{margin:0}
 .about-content{display:contents}
 .about-content > *{position:absolute}
 .about-h{left:calc(101*var(--u));top:calc(45*var(--u));font-family:var(--f-display);font-weight:600;font-variation-settings:"wdth" 100;font-size:calc(96*var(--u));line-height:normal;margin:0}
-.about-body{left:0;top:calc(200*var(--u));width:calc(1920*var(--u));height:calc(1016*var(--u))}
-.about-body>img{position:absolute;left:0;top:0;width:calc(1920*var(--u));height:calc(1016*var(--u));max-width:none}
-.mypage{left:calc(233*var(--u));top:calc(200*var(--u));color:var(--paper);font-weight:600;font-size:calc(40*var(--u));white-space:nowrap}
+.about-body{left:calc(-40*var(--u));top:calc(200*var(--u));width:calc(1960*var(--u));height:calc(1016*var(--u))}
+.about-body>img{position:absolute;left:0;top:0;width:calc(1960*var(--u));height:calc(1016*var(--u));max-width:none}
+.mypage{left:calc(195*var(--u));top:calc(200*var(--u));color:var(--paper);font-weight:600;font-size:calc(40*var(--u));white-space:nowrap}
 .photo{left:calc(101*var(--u));top:calc(416.18*var(--u));width:calc(430.407*var(--u));height:calc(598.753*var(--u));perspective:900px}
 .photo-in{position:absolute;inset:0;background:var(--sky);transition:transform .5s var(--ease);transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg))}
 .photo-in img,.photo-in .ph{position:absolute;left:calc(24.27*var(--u));top:calc(27.99*var(--u));width:calc(382.656*var(--u));height:calc(532.325*var(--u));object-fit:cover;max-width:none}
@@ -108,7 +108,7 @@ p{margin:0}
 .bar{left:calc(664*var(--u));top:calc(474*var(--u));width:calc(102*var(--u));height:calc(6*var(--u));border-radius:calc(11*var(--u));background:var(--blue);transform-origin:left}
 .desc{left:calc(664*var(--u));top:calc(531*var(--u));width:calc(846*var(--u));color:var(--paper);font-size:calc(24*var(--u));line-height:normal;word-break:keep-all}
 .meta{color:var(--paper);font-size:calc(24*var(--u));line-height:normal}
-.meta dt{font-weight:600}.meta dd{margin:0;position:absolute;top:calc(52*var(--u));white-space:nowrap}
+.meta dt{font-weight:600;font-size:calc(32*var(--u))}.meta dd{margin:0;position:absolute;top:calc(52*var(--u));white-space:nowrap;color:#8d8d8d}
 .k1{left:calc(664*var(--u));top:calc(708*var(--u))}.k2{left:calc(1007*var(--u));top:calc(708*var(--u))}.k3{left:calc(1405*var(--u));top:calc(708*var(--u))}.k4{left:calc(664*var(--u));top:calc(871*var(--u))}
 .k3 dd{white-space:normal;width:calc(371*var(--u))}
 .meta{margin:0}
@@ -224,6 +224,7 @@ a.card:focus-visible{outline:3px solid currentColor;outline-offset:4px}
   .bar{width:64px;height:5px}
   .desc{width:auto;font-size:15px;line-height:1.6}
   .meta{font-size:15px;position:relative}
+  .meta dt{font-size:17px}
   .meta dd{position:static;white-space:normal;margin-top:4px}
   .k3 dd{width:auto}
 }
@@ -261,7 +262,7 @@ a.card:focus-visible{outline:3px solid currentColor;outline-offset:4px}
   <section class="sec" id="about" aria-label="About">
     <div class="stage">
       <h2 class="about-h rv">About</h2>
-      <div class="about-body rv"><img src="assets/tab-about.svg" alt="" width="1920" height="1016"></div>
+      <div class="about-body rv"><img src="assets/tab-about.svg" alt="" width="1960" height="1016"></div>
       <p class="mypage rv">My page</p>
       <div class="about-content">
         <div class="photo rv" id="photo">
