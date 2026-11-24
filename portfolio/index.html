@@ -1,578 +1,144 @@
-<title>박민서 Portfolio</title>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="복잡한 생각과 정보를 정리하는 디자이너 박민서의 포트폴리오">
+<title>박민서 Work</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Merriweather:opsz,wdth,wght@18..144,87..112,600&family=Noto+Sans+KR:wght@300;400;500;600&display=swap">
-<style>
-/* Layout: three 1920×1080 artboards from Figma, scaled by width through --u (calc(1*var(--u)) = 1 design px). */
-:root{
-  --paper:#f5f0ee; --ink:#1a1a1a; --navy:#1d2a78; --sky:#bfd6ff; --blue:#1226ca;
-  --f-display:"Merriweather", Georgia, "Times New Roman", serif;
-  --f-sans:"Manrope", "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
-  --ease:cubic-bezier(.2,.8,.2,1);
-  color-scheme:light;
-}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-sans);overflow-x:clip}
-main{container-type:inline-size}
-.sec{--u:calc(100cqw/1920);position:relative;height:calc(1080*var(--u));overflow:clip;background:var(--paper)}
-.stage{position:absolute;left:0;top:0;width:calc(1920*var(--u));height:calc(1080*var(--u))}
-.stage > *{position:absolute}
-p{margin:0}
-
-/* ---------- Nav ---------- */
-.nav{position:fixed;z-index:50;top:max(calc(26*100vw/1920), env(safe-area-inset-top,0px));right:calc(97*100vw/1920);display:flex;gap:calc(45*100vw/1920);mix-blend-mode:difference}
-.nav a{color:#fff;text-decoration:none;font-weight:500;font-size:max(calc(28*100vw/1920),14px);position:relative;padding-bottom:4px}
-.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
-.nav a:hover::after{transform:scaleX(1)}
-.nav a:focus-visible{outline:2px solid #fff;outline-offset:4px}
-
-/* ---------- Hero ---------- */
-.welcome{left:calc(786*var(--u));top:calc(258*var(--u));font-weight:600;font-size:calc(48*var(--u));white-space:nowrap}
-/* closed folder (node 65:26) that opens on load */
-@property --open{syntax:'<number>';inherits:true;initial-value:1}
-@property --hov{syntax:'<number>';inherits:true;initial-value:0}
-/* node 63:2: closed folder only. Click it → flap opens, type springs out (node 60:4). Click again → closes. */
-#main{--open:0;--pop:0;transition:--hov .5s var(--ease),--pop .35s ease-in 0s,--open .6s cubic-bezier(.5,0,.2,1) .2s}
-#main.is-open{--open:1;--pop:1;transition:--hov .5s var(--ease),--open .7s cubic-bezier(.5,0,.2,1) 0s,--pop 1.1s cubic-bezier(.3,1.65,.45,1) .3s}
-#main:not(.is-open):has(.fold-hit:hover),#main:not(.is-open):has(.fold-hit:focus-visible){--hov:1}
-@property --pop{syntax:'<number>';inherits:true;initial-value:1}
-/* closed for a beat → flap drops open → type springs out past its spot and settles */
-.welcome,.hint{opacity:0;translate:0 calc(20*var(--u));transition:opacity .25s ease,translate .25s ease}
-.is-open .welcome{opacity:1;translate:0 0;transition:opacity .6s ease .8s,translate .7s var(--ease) .8s}
-.is-open .hint{opacity:1;translate:-0 0;transition:opacity .8s ease 1.4s}
-.fold{left:calc(480*var(--u));top:calc(303*var(--u));width:calc(960*var(--u));height:calc(607*var(--u))}
-.fold svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.fold-front{transform-origin:50% 100%;transform:perspective(2600px) rotateX(calc(clamp(0, var(--open) + var(--hov)*.15 - var(--close,0), 1.2) * -62deg))}
-.fold-hit{left:calc(480*var(--u));top:calc(303*var(--u));width:calc(960*var(--u));height:calc(607*var(--u));border-radius:calc(60*var(--u));cursor:pointer;background:none;border:0;padding:0}
-.fold-hit:focus-visible{outline:3px solid var(--blue);outline-offset:8px}
-.title-clip{--p:max(0, var(--pop) - var(--close,0));left:calc(300*var(--u));top:calc(300*var(--u));width:calc(1620*var(--u));height:calc(372*var(--u));transform-origin:calc(660*var(--u)) calc(356*var(--u));transform:translateY(calc((1 - var(--p)) * calc(200*var(--u)))) scale(calc(.4 + .6 * var(--p)));opacity:clamp(0, calc(var(--p) * 5), 1)}
-.title{position:absolute;left:calc(42*var(--u));top:calc(42*var(--u));margin:0;font-family:var(--f-display);font-weight:600;font-variation-settings:"wdth" 100;font-size:calc(250*var(--u));line-height:normal;white-space:nowrap;color:var(--ink);letter-spacing:0}
-.title span{display:inline-block}
-.is-open .title span{animation:hop .9s cubic-bezier(.3,1.5,.5,1) backwards;animation-delay:calc(var(--i)*45ms + .4s)}
-@keyframes hop{from{transform:translateY(35%) rotate(calc((var(--i) - 4) * 2deg))}to{transform:none}}
-.hint{left:calc(960*var(--u));top:calc(990*var(--u));transform:translateX(-50%);font-size:max(calc(18*var(--u)),12px);letter-spacing:.12em;text-transform:uppercase;color:#6b6460;display:flex;align-items:center;gap:calc(12*var(--u))}
-.hint i{display:block;width:1px;height:calc(40*var(--u));background:currentColor;animation:drip 1.8s ease-in-out infinite;transform-origin:top}
-@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
-
-/* ---------- Work ---------- */
-.folder{left:0;width:calc(1920*var(--u));height:calc(2200*var(--u));transform:translateY(calc(var(--dy,0)*var(--u) + var(--lift,0px)));transition:transform .8s var(--ease);color:var(--tc)}
-.folder > img{position:absolute;max-width:none;display:block}
-.folder::after{content:"";position:absolute;left:calc(-30*var(--u));right:0;top:calc(var(--h)*var(--u) - calc(2*var(--u)));height:calc(1400*var(--u));background:var(--fc)}
-.f0{top:0;--fc:var(--ink);--tc:var(--paper);--h:1080}
-.f1{top:calc(202*var(--u));--fc:var(--navy);--tc:var(--paper);--h:557}
-.f2{top:calc(346*var(--u));--fc:var(--sky);--tc:var(--ink);--h:557}
-.f3{top:calc(483*var(--u));--fc:var(--blue);--tc:var(--paper);--h:702}
-.f0>img{left:calc(-24*var(--u));top:0;width:calc(1944*var(--u));height:calc(1080*var(--u))}
-.f1>img{left:calc(-24*var(--u));top:0;width:calc(1944*var(--u));height:calc(557*var(--u))}
-.f2>img{left:calc(-25.07*var(--u));top:0;width:calc(1952*var(--u));height:calc(557*var(--u))}
-.f3>img{left:calc(-24.78*var(--u));top:0;width:calc(1950.884*var(--u));height:calc(702*var(--u))}
-.folder:has(.tab:hover){--lift:calc(-14*var(--u))}
-.folder.open:has(.tab:hover){--lift:0px}
-.tab{position:absolute;z-index:2;left:0;top:0;width:calc(560*var(--u));background:none;border:0;padding:0;cursor:pointer;color:inherit;font:inherit}
-.tab span{position:absolute;font-weight:600;font-size:calc(40*var(--u));white-space:nowrap;line-height:normal}
-.tab:focus-visible{outline:3px solid currentColor;outline-offset:-6px;border-radius:12px}
-.f0 .tab{height:calc(135*var(--u))}.f0 .tab span{left:calc(247*var(--u));top:calc(64*var(--u));transform:translateX(-50%)}
-.f1 .tab{height:calc(70*var(--u))}.f1 .tab span{left:calc(276*var(--u));top:calc(33*var(--u));transform:translateX(-50%)}
-.f2 .tab{height:calc(70*var(--u))}.f2 .tab span{left:calc(220*var(--u));top:calc(26*var(--u))}
-.f3 .tab{height:calc(88*var(--u))}.f3 .tab span{left:calc(190*var(--u));top:calc(31*var(--u))}
-.f1 .tab span,.f2 .tab span,.f3 .tab span{top:calc(12*var(--u))}
-.panel{position:absolute;z-index:1;left:calc(101*var(--u));width:var(--pw,calc(1718*var(--u)));opacity:0;transform:translateY(calc(24*var(--u)));transition:opacity .4s ease,transform .6s var(--ease);pointer-events:none}
-.open .panel{opacity:1;transform:none;transition-delay:.25s;pointer-events:auto}
-.f0 .panel{top:calc(190*var(--u))}.f1 .panel,.f2 .panel{top:calc(130*var(--u))}.f3 .panel{top:calc(140*var(--u))}
-.panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:calc(24*var(--u));margin-bottom:calc(28*var(--u));font-size:max(calc(22*var(--u)),12px)}
-.panel-head b{font-family:var(--f-display);font-weight:600;font-size:max(calc(56*var(--u)),20px);font-variation-settings:"wdth" 100}
-.panel-head small{opacity:.7;font-size:inherit}
-.cards > li{display:block;min-width:0}
-.cards{display:grid;grid-template-columns:repeat(var(--cols,2),1fr);gap:calc(28*var(--u));list-style:none;margin:0;padding:0}
-.card{border:1px solid color-mix(in srgb,currentColor 28%,transparent);border-radius:calc(14*var(--u));padding:calc(14*var(--u));transition:transform .35s var(--ease),background .35s}
-.card:hover{transform:translateY(calc(-8*var(--u)));background:color-mix(in srgb,currentColor 8%,transparent)}
-.thumb{height:calc(220*var(--u));border-radius:calc(8*var(--u));display:grid;place-items:center;font-size:max(calc(16*var(--u)),11px);opacity:.75;background:repeating-linear-gradient(135deg,color-mix(in srgb,currentColor 12%,transparent) 0 2px,transparent 2px 14px)}
-.card h3{margin:calc(16*var(--u)) 0 calc(4*var(--u));font-size:max(calc(24*var(--u)),13px);font-weight:600}
-.card p{font-size:max(calc(17*var(--u)),11px);opacity:.7}
-
-
-/* ---------- About ---------- */
-.about-content{display:contents}
-.about-content > *{position:absolute}
-.about-h{left:calc(101*var(--u));top:calc(45*var(--u));font-family:var(--f-display);font-weight:600;font-variation-settings:"wdth" 100;font-size:calc(96*var(--u));line-height:normal;margin:0}
-.about-body{left:calc(-40*var(--u));top:calc(200*var(--u));width:calc(1960*var(--u));height:calc(1016*var(--u))}
-.about-body>img{position:absolute;left:0;top:0;width:calc(1960*var(--u));height:calc(1016*var(--u));max-width:none}
-.mypage{left:calc(195*var(--u));top:calc(200*var(--u));color:var(--paper);font-weight:600;font-size:calc(40*var(--u));white-space:nowrap}
-.photo{left:calc(101*var(--u));top:calc(416.18*var(--u));width:calc(430.407*var(--u));height:calc(598.753*var(--u));perspective:900px}
-.photo-in{position:absolute;inset:0;background:var(--sky);transition:transform .5s var(--ease);transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg))}
-.photo-in img,.photo-in .ph{position:absolute;left:calc(24.27*var(--u));top:calc(27.99*var(--u));width:calc(382.656*var(--u));height:calc(532.325*var(--u));object-fit:cover;max-width:none}
-.photo-in .ph{display:none;place-items:center;background:#d5d5d5;color:#666;font-size:max(calc(20*var(--u)),12px)}
-.photo.missing img{display:none}.photo.missing .ph{display:grid}
-.lead{left:calc(664*var(--u));top:calc(389*var(--u));color:var(--paper);font-weight:600;font-size:calc(48*var(--u));white-space:nowrap}
-.bar{left:calc(664*var(--u));top:calc(474*var(--u));width:calc(102*var(--u));height:calc(6*var(--u));border-radius:calc(11*var(--u));background:var(--blue);transform-origin:left}
-.desc{left:calc(664*var(--u));top:calc(531*var(--u));width:calc(846*var(--u));color:var(--paper);font-size:calc(24*var(--u));line-height:normal;word-break:keep-all}
-.meta{color:var(--paper);font-size:calc(24*var(--u));line-height:normal}
-.meta dt{font-weight:600;font-size:calc(32*var(--u))}.meta dd{margin:0;position:absolute;top:calc(52*var(--u));white-space:nowrap;color:#8d8d8d}
-.k1{left:calc(664*var(--u));top:calc(708*var(--u))}.k2{left:calc(1007*var(--u));top:calc(708*var(--u))}.k3{left:calc(1405*var(--u));top:calc(708*var(--u))}.k4{left:calc(664*var(--u));top:calc(871*var(--u))}
-.k3 dd{white-space:normal;width:calc(371*var(--u))}
-.meta{margin:0}
-
-/* ---------- Work → project detail (Figma 38:150, 49:271) ---------- */
-a.card{display:block;color:inherit;text-decoration:none;cursor:pointer}
-a.card:focus-visible{outline:3px solid currentColor;outline-offset:4px}
-/* project images sit inside their slot (whole image visible) so the title and description below stay in view */
-.thumb:has(img){opacity:1;display:block;overflow:hidden;background:var(--paper)}
-.thumb img{display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit}
-#work .card{transition:transform .5s var(--ease),box-shadow .5s var(--ease),background .35s}
-#work .card.picked{transform:translateY(calc(-18*var(--u))) scale(1.02);box-shadow:0 calc(24*var(--u)) calc(40*var(--u)) rgba(0,0,0,.25)}
-/* the rest of the stack slides away / comes back (staggered) */
-#work.dropping .folder{transform:translateY(calc(var(--dy,0)*var(--u) + calc(1200*var(--u))));transition:transform 1s cubic-bezier(.5,0,.25,1);transition-delay:calc(var(--k,0)*80ms)}
-#work.rising .folder{transition:transform .85s cubic-bezier(.25,.6,.3,1);transition-delay:calc(var(--k,0)*70ms)}
-#work.dropping .folder.lifted{transform:translateY(calc(var(--dy,0)*var(--u)));transition:none}
-#work .folder.open .panel{clip-path:inset(0 0 0 0)}
-/* the folder's cards are swept down into it before it is picked up */
-#work .folder.tucked .panel{clip-path:inset(0 0 100% 0);transform:translateY(calc(40*var(--u)));transition:clip-path .35s cubic-bezier(.5,0,.75,0),transform .35s cubic-bezier(.5,0,.75,0)}
-/* from here the flying copy (identical shape, position and label) carries on */
-#work .folder.handoff{visibility:hidden}
-
-.detail{--u:calc(100vw/1920);position:fixed;inset:0;z-index:40;overflow:hidden auto;color:var(--ink)}
-.d-bg{position:fixed;inset:0;background:var(--paper)}
-.dstage{position:relative;width:calc(1920*var(--u));height:calc(1080*var(--u));overflow:clip}
-/* The folder is built upright, in Figma's own (pre-rotation) coordinates: tab on top, as in the Work stack.
-   Its resting state is rotate(90deg) — tab on the right — which is exactly the Figma detail frame. */
-.dfly{position:absolute;transform-origin:50% 50%;transform:rotate(90deg);will-change:transform}
-.dfly > *{position:absolute}
-.d-folder{left:0;top:0;width:100%;height:100%;overflow:visible;transform-origin:0 0}
-.d-shape{left:0;transform-origin:0 0}
-.d-front{left:0;width:100%;border-radius:calc(28*var(--u)) calc(28*var(--u)) 0 0}
-.d-lab{visibility:hidden;top:0;left:0;height:calc(55*var(--u));font:600 calc(40*var(--u))/calc(55*var(--u)) var(--f-sans);white-space:nowrap;pointer-events:none}
-.d-tab{top:calc(13*var(--u));height:calc(55*var(--u));font:600 calc(40*var(--u))/calc(55*var(--u)) var(--f-sans);background:none;border:0;padding:0;cursor:pointer;white-space:nowrap;text-align:center}
-.d-tab:focus-visible{outline:3px solid currentColor;outline-offset:6px;border-radius:8px}
-.d-slide{left:0;top:0;width:100%;height:100%}
-/* the document is counter-rotated, so everything inside uses the Figma frame's own x/y */
-.d-doc{position:absolute;width:calc(1920*var(--u));height:calc(1080*var(--u));transform:rotate(-90deg)}
-.d-doc > *,.d-doc .d-img{position:absolute}
-.d-paper{left:calc(535*var(--u));top:calc(122*var(--u));width:calc(1160*var(--u));height:calc(958*var(--u));background:var(--paper)}
-.d-dot{width:calc(24*var(--u));height:calc(24*var(--u));border-radius:50%;left:calc(557*var(--u))}
-.d-title{left:calc(614*var(--u));top:calc(189*var(--u));margin:0;font:600 calc(40*var(--u))/normal var(--f-display);font-variation-settings:"wdth" 100;white-space:pre;color:#000}
-.d-bar{left:calc(614*var(--u));top:calc(315*var(--u));width:calc(102*var(--u));height:calc(6*var(--u));border-radius:calc(11*var(--u))}
-.d-ko{font-family:"Pretendard","Noto Sans KR",var(--f-sans);color:#000;line-height:normal;margin:0;word-break:keep-all}
-.d-body{left:calc(614*var(--u));top:calc(360*var(--u));font-size:calc(24*var(--u));font-weight:300}
-.d-h{left:calc(1192*var(--u));top:calc(692*var(--u));font-size:calc(32*var(--u));font-weight:500;white-space:nowrap}
-.d-body2{left:calc(1192*var(--u));top:calc(747*var(--u));width:calc(476*var(--u));font-size:calc(24*var(--u));font-weight:300}
-.d-box{background:#d9d9d9}
-.d-img{display:block;object-fit:cover;max-width:none;transition:transform .5s var(--ease),filter .5s var(--ease)}
-.d-img.contain{object-fit:contain}
-.d-img:hover{transform:translateY(calc(-8*var(--u))) rotate(-1deg);filter:drop-shadow(0 calc(14*var(--u)) calc(18*var(--u)) rgba(0,0,0,.16))}
-.d-media{display:contents}
-
-@media (max-width:760px){
-  .detail{--u:1px}
-  .dstage{width:auto;height:auto;overflow:visible;padding:64px 16px 32px}
-  .dfly{position:relative;left:0!important;top:0!important;width:auto!important;height:auto!important;transform:none!important;display:flex;flex-direction:column;gap:16px;background:var(--paper);border-radius:6px;padding:28px 20px 32px;box-shadow:0 0 0 10px var(--fc)}
-  .d-slide,.d-doc{display:contents}
-  .dfly > *,.d-doc > *,.d-doc .d-img{position:static!important;width:auto!important;height:auto!important;left:auto!important;top:auto!important;transform:none!important}
-  .d-folder,.d-shape,.d-lab,.d-paper,.d-front,.d-dot,.d-box{display:none}
-  .d-tab{order:-1;align-self:flex-start;font-size:14px;line-height:1;background:var(--fc);padding:8px 14px;border-radius:999px}
-  .d-title{font-size:30px}
-  .d-bar{width:64px!important;height:5px!important}
-  .d-body,.d-body2{font-size:16px;line-height:1.65}
-  .d-h{font-size:20px;margin-top:12px}
-  .d-media{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center}
-  .d-img{width:100%!important;max-width:100%}
-  .d-img.wide{grid-column:span 2}
-}
-
-/* reveal on scroll (content is visible without JS) */
-.js .rv{transition:transform .9s var(--ease),opacity .9s ease}
-.js .rv:not(.in){opacity:0;transform:translateY(calc(50*var(--u)))}
-.js .bar.rv:not(.in){opacity:1;transform:scaleX(0)}
-.js .about-body.rv:not(.in){opacity:1;transform:translateY(calc(160*var(--u)))}
-.js .mypage.rv:not(.in){opacity:1;transform:translateY(calc(160*var(--u)))}
-
-@media (prefers-reduced-motion:reduce){
-  .title span,.hint i{animation:none !important}
-  #main,#main.is-open,.welcome,.hint{transition:none !important}
-  .js .rv:not(.in){opacity:1;transform:none}
-  .folder,.panel,.photo-in{transition:none}
-}
-
-/* ---------- Phone ---------- */
-@media (max-width:760px){
-  .nav{top:max(14px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));gap:18px}
-  .nav a{font-size:15px}
-  #main{--u:calc(100cqw/1400);height:calc(860*var(--u))}
-  #main .stage{transform:translate(calc(-260*var(--u)),calc(-110*var(--u)))}
-  .welcome{font-size:max(calc(48*var(--u)),17px)}
-  .hint{display:none}
-  #work{--u:calc(100cqw/1000)}
-  .folder{--pw:calc(798*var(--u))}
-  .cards{--cols:2 !important}
-  .thumb{height:calc(180*var(--u))}
-  #about{height:auto;overflow:visible}
-  #about .stage{position:relative;width:auto;height:auto}
-  #about .stage > *{position:static}
-  .about-h{font-size:44px;padding:56px 16px 20px}
-  .mypage{display:inline-block;position:relative !important;left:0;top:0;z-index:1;font-size:20px;padding:10px 0 10px 56px;transform:none !important}
-  .about-body{position:absolute !important;inset:auto 0 0 0;top:118px;width:auto;height:auto;background:var(--ink);border-radius:0;transform:none !important}
-  .about-body>img{left:-200px;width:1100px;height:auto}
-  .about-content{position:relative;z-index:1;background:var(--ink);display:flex;flex-direction:column;gap:20px;padding:32px 16px 56px;margin-top:-1px}
-  .about-content > *{position:static}
-  .photo{width:min(100%,300px);height:auto;aspect-ratio:430/599}
-  .photo-in{position:absolute}
-  #about .about-content{position:relative;padding-top:8px}
-  #about .about-content > *{position:static}
-  .photo{position:relative !important;left:auto;top:auto}
-  .photo-in img,.photo-in .ph{left:5.6%;top:4.7%;width:88.9%;height:88.9%}
-  .lead{font-size:21px;white-space:normal;word-break:keep-all;margin-top:12px}
-  .bar{width:64px;height:5px}
-  .desc{width:auto;font-size:15px;line-height:1.6}
-  .meta{font-size:15px;position:relative}
-  .meta dt{font-size:17px}
-  .meta dd{position:static;white-space:normal;margin-top:4px}
-  .k3 dd{width:auto}
-}
-</style>
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600;700&family=Manrope:wght@400;500;600&family=Merriweather:opsz,wdth,wght@18..144,87..112,600&family=Noto+Sans+KR:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 <nav class="nav" aria-label="섹션">
-  <a href="#main">Main</a><a href="#work">Work</a><a href="#about">About</a>
+  <a href="#main">Main</a><a href="#work">Work</a>
 </nav>
 
+<!-- Page transition sheet (reference .transition-overlay) -->
+<div class="t-overlay" id="tOverlay" aria-hidden="true"><div class="t-back"></div><div class="t-block"></div></div>
+
+<div id="app">
 <main>
-  <!-- Main · node 60:4 -->
-  <section class="sec" id="main" aria-label="Welcome">
-    <div class="stage">
-      <!-- Folder · node 65:26 -->
-      <div class="fold" aria-hidden="true">
-        <svg viewBox="0 0 819 518" width="960" height="607"><defs><clipPath id="fc"><path d="M0 52A52 52 0 0 1 52 0H250C268 0 278 6 290 20L330 72C340 80 350 82 365 82H767A52 52 0 0 1 819 134V466A52 52 0 0 1 767 518H52A52 52 0 0 1 0 466Z"/></clipPath></defs>
-          <path d="M0 52A52 52 0 0 1 52 0H250C268 0 278 6 290 20L330 72C340 80 350 82 365 82H767A52 52 0 0 1 819 134V466A52 52 0 0 1 767 518H52A52 52 0 0 1 0 466Z" fill="#4A63E7"/>
-          <rect x="2" y="84" width="815" height="432" fill="#4A63E7" clip-path="url(#fc)"/>
-        </svg>
+  <!-- ===================== MAIN + ABOUT (unchanged) ===================== -->
+  <div class="page page-home" id="page-home">
+    <!-- ===================== HOME = Main + About =====================
+         Positions: --x/--y on the 1920×1080 desktop, --mx/--my on the 1080×1500 phone artboard. -->
+    <section class="home" id="sec-main" aria-label="박민서 포트폴리오">
+      <div class="desk" id="desk">
+        <p class="at brace" style="--x:110;--y:40;--mx:60;--my:110">{PORTFOLIO}</p>
+        <p class="at brace c" style="--x:920;--y:40;--mx:540;--my:110">{2026}</p>
+        <p class="at brace r" style="--x:1640;--y:40;--mx:1020;--my:110">{PARK MINSEO}</p>
+        <i class="at frame" style="--x:100;--y:105;--mx:60;--my:180" aria-hidden="true"></i>
+
+        <!-- photo: assets/me-cutout.webp (background removed from assets/profile.jpg) -->
+        <div class="at me" style="--x:604;--y:125;--mx:90;--my:932"><img src="assets/me-cutout.webp" alt="박민서"></div>
+
+        <h1 class="at big" style="--x:370;--y:215;--mx:120;--my:300" aria-label="Every piece connects when I sit down to make it clear">
+          <span class="line"><span>Every</span></span>
+          <span class="line"><span>piece</span></span>
+        </h1>
+        <div class="at select" style="--x:575;--y:490;--mx:100;--my:1350" aria-hidden="true">
+          <i class="select-fill"></i>
+          <p class="select-word"><span class="line"><span>CONNECTS</span></span></p>
+          <i class="select-edge l"></i><i class="select-edge r"></i>
+          <i class="select-dot tr"></i><i class="select-dot bl"></i>
+        </div>
+        <p class="at big big-r" style="--x:1265;--y:650;--mx:470;--my:1590" aria-hidden="true">
+          <span class="line"><span>when I sit</span></span>
+          <span class="line"><span>down to <b>make</b></span></span>
+          <span class="line"><span>it <b>clear</b></span></span>
+        </p>
+
+        <!-- folders: data-open = window to open, or href to a page -->
+        <a class="at folder-ic" href="#work" style="--x:1430;--y:175;--mx:770;--my:290" data-drag><svg viewBox="0 0 150 118" aria-hidden="true"><path d="M6 14a8 8 0 0 1 8-8h38c4 0 6 1.5 8 4l6 7h70a8 8 0 0 1 8 8v79a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8Z" fill="#a8a7a4"/><rect x="6" y="30" width="138" height="82" rx="8" fill="#c9c8c5"/><rect x="6" y="30" width="138" height="3" fill="#dcdbd8"/></svg><span>work-2024-2026</span></a>
+        <button class="at folder-ic" type="button" data-open="winAbout" style="--x:200;--y:600;--mx:50;--my:720" data-drag><svg viewBox="0 0 150 118" aria-hidden="true"><path d="M6 14a8 8 0 0 1 8-8h38c4 0 6 1.5 8 4l6 7h70a8 8 0 0 1 8 8v79a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8Z" fill="#a8a7a4"/><rect x="6" y="30" width="138" height="82" rx="8" fill="#c9c8c5"/><rect x="6" y="30" width="138" height="3" fill="#dcdbd8"/></svg><span>about-me</span></button>
+        <button class="at folder-ic" type="button" data-open="winKit" style="--x:1600;--y:420;--mx:800;--my:1860" data-drag><svg viewBox="0 0 150 118" aria-hidden="true"><path d="M6 14a8 8 0 0 1 8-8h38c4 0 6 1.5 8 4l6 7h70a8 8 0 0 1 8 8v79a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8Z" fill="#a8a7a4"/><rect x="6" y="30" width="138" height="82" rx="8" fill="#c9c8c5"/><rect x="6" y="30" width="138" height="3" fill="#dcdbd8"/></svg><span>toolkit-2026</span></button>
+
+        <svg class="at cursor" id="cursor" style="--x:1740;--y:595;--mx:990;--my:1985" viewBox="0 0 46 56" aria-hidden="true"><path d="M4 3v42l11-10 8 17 7-3-8-17h16Z" fill="#fff" stroke="#111" stroke-width="2.4" stroke-linejoin="round"/></svg>
+
+        <p class="at just" style="--x:150;--y:915;--mx:100;--my:1940">
+          <span class="line"><span>Park Minseo — designer</span></span>
+          <span class="line"><span>organizing complex ideas</span></span>
+          <span class="line"><span>into clear forms</span></span>
+        </p>
+
       </div>
-      <div class="title-clip"><h1 class="title" aria-label="PORTFOLIO"><span style="--i:0">P</span><span style="--i:1">O</span><span style="--i:2">R</span><span style="--i:3">T</span><span style="--i:4">F</span><span style="--i:5">O</span><span style="--i:6">L</span><span style="--i:7">I</span><span style="--i:8">O</span></h1></div>
-      <p class="welcome">Welcome to my</p>
-      <div class="fold" aria-hidden="true"><svg class="fold-front" viewBox="0 0 819 518" width="960" height="607"><path d="M0 82H767A52 52 0 0 1 819 134V466A52 52 0 0 1 767 518H52A52 52 0 0 1 0 466Z" fill="#4A63E7"/></svg></div>
-      <button class="fold-hit" id="foldBtn" type="button" aria-expanded="false" aria-label="폴더 열기"></button>
-      <p class="hint" aria-hidden="true"><i></i>Scroll</p>
-    </div>
-  </section>
+    </section>
 
-  <!-- Work · node 54:2 -->
-  <section class="sec" id="work" aria-label="Work">
-    <div class="stage" id="folders"></div>
-  </section>
+    <!-- ===================== ABOUT windows (Korean content from the previous About) ===================== -->
+    <section class="win" id="winAbout" hidden role="dialog" aria-labelledby="winAboutT">
+      <div class="win-bar"><button class="win-x" type="button" aria-label="닫기"></button><i class="win-dot"></i><i class="win-dot"></i><p class="win-title" id="winAboutT">about-me</p></div>
+      <div class="win-body">
+        <p class="win-lead">복잡한 생각과 정보를 정리하는 디자이너 박민서입니다.</p>
+        <i class="win-bar-blue" style="display:block"></i>
+        <p class="win-text">복잡한 정보와 추상적인 아이디어를 구조화하고, 사용자가 쉽게 이해할 수 있는 시각적 형태로 정리하는 과정을 좋아합니다. UI/UX, 브랜딩, 그래픽 등 다양한 매체를 경험하며 새로운 표현 방식을 탐구하고 있습니다.</p>
+        <a class="win-cta" href="#work">작업 보러 가기 →</a>
+      </div>
+    </section>
+    <section class="win" id="winKit" hidden role="dialog" aria-labelledby="winKitT">
+      <div class="win-bar"><button class="win-x" type="button" aria-label="닫기"></button><i class="win-dot"></i><i class="win-dot"></i><p class="win-title" id="winKitT">toolkit-2026</p></div>
+      <div class="win-body">
+        <dl class="win-grid">
+          <div><dt>작업 방식</dt><dd>분해 / 연결 / 재구성</dd></div>
+          <div><dt>관심 분야</dt><dd>UI/UX, Branding, Graphic, Web</dd></div>
+          <div><dt>Tools</dt><dd>Figma, Illustrator, Photoshop, After Effects</dd></div>
+          <div><dt>Keywords</dt><dd>조각, 분할선, 맞물림, 재배열, 완성된 형태</dd></div>
+        </dl>
+      </div>
+    </section>
+  </div>
 
-  <!-- About · node 60:42 -->
-  <section class="sec" id="about" aria-label="About">
-    <div class="stage">
-      <h2 class="about-h rv">About</h2>
-      <div class="about-body rv"><img src="assets/tab-about.svg" alt="" width="1960" height="1016"></div>
-      <p class="mypage rv">My page</p>
-      <div class="about-content">
-        <div class="photo rv" id="photo">
-          <div class="photo-in">
-            <img src="assets/profile.jpg" alt="박민서 프로필 사진" onerror="this.closest('.photo').classList.add('missing')">
-            <div class="ph">프로필 사진</div>
+  <!-- ===================== WORK ===================== -->
+  <div class="page page-work" id="page-work">
+    <section class="work-hero">
+      <div class="work-title-wrap">
+        <h1 class="work-title" aria-label="Work">
+          <span class="line"><span>Work</span></span>
+          <span class="line work-count"><span id="workCount">(05)</span></span>
+        </h1>
+      </div>
+      <div class="infos" data-reveal>
+        <i class="w-border"></i>
+        <p class="w-label"><span class="line"><span>[ Work ]</span></span></p>
+        <div class="infos-right">
+          <p class="infos-text">
+            <span class="line"><span>흩어진 생각과 정보를 연결하고,</span></span>
+            <span class="line"><span>발견하고, 정리해 하나의 명확한</span></span>
+            <span class="line"><span>결과로 완성한 작업들입니다.</span></span>
+          </p>
+          <div class="infos-side">
+            <span class="line"><span class="keywords"><span>연결</span><span>발견</span><span>정리</span><span>성장</span></span></span>
+            <span class="line"><span>2024 — 2026</span></span>
           </div>
         </div>
-        <p class="lead rv">복잡한 생각과 정보를 정리하는 디자이너 박민서입니다.</p>
-        <div class="bar rv" aria-hidden="true"></div>
-        <p class="desc rv">복잡한 정보와 추상적인 아이디어를 구조화하고, 사용자가 쉽게 이해할 수 있는 시각적 형태로 정리하는 과정을 좋아합니다. UI/UX, 브랜딩, 그래픽 등 다양한 매체를 경험하며 새로운 표현 방식을 탐구하고 있습니다.</p>
-        <dl class="meta k1 rv"><dt>작업 방식</dt><dd>분해/연결/재구성</dd></dl>
-        <dl class="meta k2 rv"><dt>관심 분야</dt><dd>UI/UX,Branding,Graphic,Web</dd></dl>
-        <dl class="meta k3 rv"><dt>Tools</dt><dd>Figma,illustrator,Photoshop,After Effects</dd></dl>
-        <dl class="meta k4 rv"><dt>Keywords</dt><dd>조각, 분할선, 맞물림, 재배열, 완성된 형태</dd></dl>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
 
-<!-- Project detail · nodes 38:150 / 49:271 (filled from PROJECTS) -->
-<div class="detail" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="dTitle">
-  <div class="d-bg" id="dBg"></div>
-  <div class="dstage"><div class="dfly" id="dfly"></div></div>
+    <!-- project list is built from js/projects.js -->
+    <section class="work-grid" id="workGrid" aria-label="Projects"></section>
+
+    <footer class="w-footer" data-reveal>
+      <i class="w-border"></i>
+      <p class="w-label"><span class="line"><span>©2026 Park Minseo</span></span></p>
+      <div class="w-footer-links">
+        <a href="#main"><span class="line"><span class="link-line">Main</span></span></a>
+        <a href="#about"><span class="line"><span class="link-line">About</span></span></a>
+        <a href="#work" data-first-project><span class="line"><span class="link-line">First project</span></span></a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ===================== PROJECT (filled from js/projects.js) ===================== -->
+  <div class="page page-project" id="page-project"></div>
+</main>
 </div>
 
-<script>
-document.documentElement.classList.add('js');
-
-/* ---- Work data: 프로젝트를 여기에 채우면 카드가 바뀝니다 ---- */
-const WORKS = [
-  {name:'Planning', svg:'tab-planning.svg', items:[]},
-  {name:'Motion Graphics', svg:'tab-motion.svg', items:[]},
-  {name:'UI/UX', svg:'tab-uiux.svg', items:[
-    {title:'UI/UX Redesign', sub:'야놀자 리디자인', img:'assets/ux-thumb.jpg', detail:'uiux-redesign'},
-    {title:'UI/UX 프로젝트 02', sub:'예시 · 제목과 설명을 입력하세요'},
-  ]},
-  {name:'Graphics', svg:'tab-graphics.svg', items:[
-    {title:'Visual Communication', sub:'형태와 색의 관계를 탐구', img:'assets/vc-thumb.jpg', detail:'visual-communication'},
-    {title:'Graphics 프로젝트 02', sub:'예시 · 제목과 설명을 입력하세요'},
-  ]},
-];
-const DESIGN_TOP = [0,202,346,483];   // Figma y of each folder
-const PEEK = 92;                        // tab height left visible when a folder is pushed down
-
-const wrap = document.getElementById('folders');
-WORKS.forEach((w,i)=>{
-  const items = w.items.length ? w.items :
-    [1,2].map(n=>({title:`${w.name} 프로젝트 ${String(n).padStart(2,'0')}`, sub:'예시 · 제목과 설명을 입력하세요'}));
-  const f = document.createElement('div');
-  f.className = `folder f${i}`;
-  f.innerHTML = `
-    <img src="assets/${w.svg}" alt="">
-    <button class="tab" aria-expanded="false" aria-controls="panel${i}"><span>${w.name}</span></button>
-    <div class="panel" id="panel${i}" role="region" aria-label="${w.name}">
-      <div class="panel-head"><b>${w.name}</b><small>${items.length} projects</small></div>
-      <ul class="cards">${items.map(it=>`
-        <li>${it.detail?`<a class="card" href="#${it.detail}" data-detail="${it.detail}">`:'<div class="card">'}<div class="thumb">${it.img?`<img src="${it.img}" alt="">`:'이미지 추가'}</div>
-        <h3>${it.title}</h3><p>${it.sub}</p>${it.detail?'</a>':'</div>'}</li>`).join('')}
-      </ul>
-    </div>`;
-  f.querySelector('.tab').addEventListener('click',()=>openFolder(i));
-  wrap.appendChild(f);
-});
-const folders = [...wrap.children];
-function openFolder(k){
-  folders.forEach((f,j)=>{
-    const dy = j>k ? (1080 - (folders.length-j)*PEEK) - DESIGN_TOP[j] : 0;
-    f.style.setProperty('--dy', dy);
-    f.classList.toggle('open', j===k);
-    f.querySelector('.tab').setAttribute('aria-expanded', j===k);
-    f.querySelector('.panel').inert = j!==k;
-  });
-}
-openFolder(3); // matches the Figma frame: Graphics is the open folder
-
-/* Hero: folder opens/closes on click */
-const heroSec = document.getElementById('main'), foldBtn = document.getElementById('foldBtn');
-foldBtn.addEventListener('click',()=>{
-  const open = heroSec.classList.toggle('is-open');
-  foldBtn.setAttribute('aria-expanded', open);
-  foldBtn.setAttribute('aria-label', open ? '폴더 닫기' : '폴더 열기');
-});
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ---- Project pages (Figma 38:150 VC, 49:271 UI/UX).
-   W,H,path: the folder shape in its own upright coordinates. F: where its centre sits in the 1920×1080 frame.
-   Everything inside .d-doc uses the frame's coordinates directly. ---- */
-const PROJECTS = {
-  'visual-communication': {
-    W:1200, H:1720, F:[960,687], back:'#1226CA', front:'#1226CA', tabW:535.457, tabH:70,
-    work:{folder:3, x0:-24.78, tabW:630.75, tabH:88, label:{text:'Graphics', x:214.78, y:31, color:'#F5F0EE'}},
-    path:'M474.601 0C483.539 0 491.899 4.424 496.926 11.815L532.293 63.815C533.651 65.812 534.698 67.888 535.457 70L1200 70L1200 1720L0 1720L0 27C0 12.088 12.088 0 27 0L474.601 0Z',
-    tab:{text:'Graphics', x:166, w:171, color:'#F5F0EE'}, dot:'#1226CA', bar:'#1226CA',
-    title:'Visual \nCommunication', bodyW:420,
-    body:'형태와 색의 관계를 탐구하고, 단순한 조형 요소를 반복·분할하며 화면 안에서 새로운 구조를 만들었습니다. 서로 다른 컬러의 대비와 조화를 활용해 시각적 리듬과 깊이를 표현하고, 요소의 크기와 배치를 조절해 화면의 균형과 흐름을 실험한 포스터 작업입니다.',
-    body2:'기본 형태를 반복·분할·배치하며 화면의 균형과 리듬을 조절했고, 형태의 크기와 위치, 겹침을 변화시키며 다양한 구조를 실험했습니다. 또한 서로 다른 색의 대비와 조화를 활용해 각 형태가 전달하는 분위기를 강조하고, 시선이 자연스럽게 이동할 수 있도록 전체적인 시각적 흐름을 구성했습니다.',
-    boxes:[[1056,228,612,425],[614,692,559,341]],
-    media:[
-      ['assets/vc-wave.jpg','WAVE · FLOW 포스터',1076,239,280,396],
-      ['assets/vc-depth.jpg','DEPTH · DEEP SEA 포스터',1372,241,280,396],
-      ['assets/vc-bon.jpg','本 · 기본이 구조를 만든다 포스터',644,719,213,302],
-      ['assets/vc-force.jpg','FORCE 타이포그래피 포스터',910,719,214,302],
-    ]},
-  'uiux-redesign': {
-    W:1952, H:1719.874, F:[960,1062.95], back:'#BFD6FF', front:'#BFD6FF', tabW:623.883, tabH:74.32,
-    work:{folder:2, x0:-25.07, tabW:628.87, tabH:70, label:{text:'UI/UX', x:245.07, y:26, color:'#1A1A1A'}},
-    path:'M559.269 0C568.231 0 576.609 4.447 581.631 11.87L623.883 74.32L1952 74.32L1952 1719.874L0 1719.874L0 74.32L0.051 74.32L0.051 27C0.051 12.088 12.139 0 27.051 0L559.269 0Z',
-    tab:{text:'UI/UX Redesign', x:136, w:298, color:'#575757'}, dot:'#BFD6FF', bar:'#BFD6FF',
-    title:'UI/UX \nRedesign', bodyW:432,
-    body:'야놀자 앱의 복잡한 정보 구조를 분석하고, <br>사용자가 필요한 정보를 빠르게 찾을 수 있도록 화면의 우선순위와 구성을 재정리했습니다. <br>블루 톤과 여행 오브제를 활용해 직관적이고 일관된 사용자 경험을 구성한 UI/UX 리디자인 작업입니다.',
-    body2:'복잡하게 구성된 정보와 프로모션 요소의 우선순위를 다시 정리하고, 카테고리와 콘텐츠 배치를 조절해 사용자가 필요한 정보를 자연스럽게 탐색할 수 있도록 구조를 개선했습니다. 또한 블루 톤과 여행 오브제를 활용해 화면 간 시각적 통일성을 높이고, 정보가 단계적으로 읽히는 흐름을 구성했습니다.',
-    boxes:[],
-    media:[
-      ['assets/ux-phone1.png','교통 화면',1115,356.41,251.77,288.22,'contain'],
-      ['assets/ux-phone2.png','국내레저 화면',1209.47,284.72,232.77,321.83,'contain'],
-      ['assets/ux-phone3.png','티켓 홈 화면',1334.95,252.33,188.31,318.93,'contain'],
-      ['assets/ux-phone4.png','홈 화면',1471.83,249,152.17,314.1,'contain'],
-      ['assets/ux-home.png','Home 카테고리 아이콘',614,571,586,268,'contain wide'],
-      ['assets/ux-ticket.png','Ticket 카테고리 아이콘',569,759,586,299,'contain wide'],
-    ]},
-};
-const U = n => `calc(${n}*var(--u))`;
-function renderProject(key){
-  const p = PROJECTS[key], [Fx,Fy] = p.F, Cx = p.W/2, Cy = p.H/2;
-  fly.style.cssText = `left:${U(Fx-Cx)};top:${U(Fy-Cy)};width:${U(p.W)};height:${U(p.H)};--fc:${p.back}`;
-  return `
-    <svg class="d-folder" viewBox="0 0 ${p.W} ${p.H}" aria-hidden="true"><path d="${p.path}" fill="${p.back}"/></svg>
-    <div class="d-shape" style="top:${U(p.tabH)};width:${U(p.W)};height:${U(p.H-p.tabH)};background:${p.back}" aria-hidden="true"></div>
-    <div class="d-slide">
-      <div class="d-doc" style="left:${U(Cx-Fx)};top:${U(Cy-Fy)};transform-origin:${U(Fx)} ${U(Fy)}">
-        <div class="d-paper" aria-hidden="true"></div>
-        ${[177,339,525].map(y=>`<i class="d-dot" style="top:${U(y)};background:${p.dot}" aria-hidden="true"></i>`).join('')}
-        <h2 class="d-title" id="dTitle" tabindex="-1">${p.title}</h2>
-        <div class="d-bar" style="background:${p.bar}" aria-hidden="true"></div>
-        <p class="d-ko d-body" style="width:${U(p.bodyW)}">${p.body}</p>
-        ${p.boxes.map(([x,y,w,h])=>`<div class="d-box" style="left:${U(x)};top:${U(y)};width:${U(w)};height:${U(h)}" aria-hidden="true"></div>`).join('')}
-        <div class="d-media">${p.media.map(([src,alt,x,y,w,h,cls=''])=>`<img class="d-img ${cls}" src="${src}" alt="${alt}" style="left:${U(x)};top:${U(y)};width:${U(w)};height:${U(h)}">`).join('')}</div>
-        <h3 class="d-ko d-h">핵심 설명</h3>
-        <p class="d-ko d-body2">${p.body2}</p>
-      </div>
-    </div>
-    <div class="d-front" style="top:${U(210)};height:${U(p.H-210)};background:${p.front}" aria-hidden="true"></div>
-    <span class="d-lab" style="color:${p.work.label.color};transform:translate(${U(p.work.label.x)},${U(p.work.label.y)})" aria-hidden="true">${p.work.label.text}</span>
-    <button class="d-tab" type="button" data-back style="left:${U(p.tab.x)};width:${U(p.tab.w)};color:${p.tab.color}" aria-label="Work로 돌아가기">${p.tab.text}</button>`;
-}
-
-/* ---- Transition, after the reference (files.* folder pull):
-   ① lift   0–30%   the other folders slide away; the chosen folder rises from the bottom, upright, tab on top
-   ② peek  30–55%   it tilts a little toward you and the document slides up out of the folder
-   ③ turn  55–100%  it turns 90° clockwise while growing to full size (tab ends on the right),
-                    the front panel slides out and the document settles back in — the page is the opened folder
-   Back plays the same timeline in reverse, and the other folders come back up into the stack. ---- */
-const work = document.getElementById('work');
-const detail = document.getElementById('detail'), fly = document.getElementById('dfly'), dBg = document.getElementById('dBg');
-const narrow = () => matchMedia('(max-width:760px)').matches;
-const wait = ms => new Promise(r=>setTimeout(r,ms));
-const DUR = 2900, BACK_RATE = 1.3;
-let anims = [], current = null, card = null, returnFocus = null, busy = false;
-
-function play(key){
-  const p = PROJECTS[key], w = p.work, u = innerWidth/1920, vw = innerWidth, vh = innerHeight;
-  const Fx = p.F[0]*u, Fy = p.F[1]*u, Cx = p.W/2*u, Cy = p.H/2*u;
-  const wf = folders[w.folder].getBoundingClientRect();
-  const sx = w.tabW/p.tabW, sy = w.tabH/p.tabH;             // tab of the Work folder vs tab of the page folder
-  const bx = (1951)/p.W;                                      // Work folder spans the full width
-  const by = Math.max(1, ((vh - wf.top)/u + 60) / (p.H - p.tabH));
-  const s1 = Math.min(.9, 1000/p.W);                          // size while standing upright
-  const h1 = p.H*u*s1;
-  const T = (x,y,rx,rz,sc) => `translate(${x-Fx}px,${y-Fy}px) perspective(2600px) rotateX(${rx}deg) rotate(${rz}deg) scale(${sc})`;
-  const start = [w.x0*u + Cx, wf.top + Cy];                   // fly's local (0,0) sits on the Work folder's top-left
-  const sm = 'cubic-bezier(.45,0,.25,1)', soft = 'cubic-bezier(.3,.6,.3,1)';
-  const sameLabel = w.label.text === p.tab.text;
-  const lab = fly.querySelector('.d-lab'), tab = fly.querySelector('.d-tab');
-  anims = [
-    // ① lift: the folder itself rises a little and gathers into a single file (narrower)
-    // ② peek: tilts toward you, the document slides up out of it
-    // ③ turn: 90° clockwise to the page position
-    fly.animate([
-      {transform:T(start[0], start[1], 0, 0, 1), offset:0, easing:soft},
-      {transform:T(vw/2, vh*.2 + h1/2, 0, -3, s1), offset:.32, easing:sm},
-      {transform:T(vw/2, vh*.13 + h1*1.04/2, 9, -11, s1*1.04), offset:.52, easing:'cubic-bezier(.5,0,.2,1)'},
-      {transform:T(Fx, Fy, 0, 90, 1), offset:1}
-    ],{duration:DUR, fill:'both'}),
-    fly.querySelector('.d-folder').animate([
-      {transform:`scale(${sx},${sy})`, offset:0, easing:sm}, {transform:'scale(1,1)', offset:.32}, {transform:'scale(1,1)', offset:1}
-    ],{duration:DUR, fill:'both'}),
-    fly.querySelector('.d-shape').animate([
-      {transform:`translateY(${(w.tabH-p.tabH)*u}px) scale(${bx},${by})`, offset:0, easing:sm},
-      {transform:'translateY(0) scale(1,1)', offset:.32}, {transform:'translateY(0) scale(1,1)', offset:1}
-    ],{duration:DUR, fill:'both'}),
-    fly.querySelector('.d-slide').animate([
-      {transform:`translateY(${140*u}px)`, offset:0},
-      {transform:`translateY(${140*u}px)`, offset:.3, easing:'cubic-bezier(.4,0,.2,1)'},
-      {transform:`translateY(${-300*u}px)`, offset:.52},
-      {transform:`translateY(${-300*u}px)`, offset:.66, easing:'cubic-bezier(.5,0,.2,1)'},
-      {transform:'translateY(0)', offset:1}
-    ],{duration:DUR, fill:'both'}),
-    fly.querySelector('.d-front').animate([
-      {transform:'translateY(0)', offset:0},
-      {transform:'translateY(0)', offset:.58, easing:'cubic-bezier(.45,0,.3,1)'},
-      {transform:'translateY(115%)', offset:.92},
-      {transform:'translateY(115%)', offset:1}
-    ],{duration:DUR, fill:'both'}),
-    // tab label: same word → it simply settles into its new place; different word → wipe from the Work name to the page name
-    sameLabel
-      ? tab.animate([
-          {transform:`translate(${(w.label.x-p.tab.x)*u}px,${(w.label.y-13)*u}px)`, offset:0, easing:sm},
-          {transform:'translate(0,0)', offset:.32}, {transform:'translate(0,0)', offset:1}
-        ],{duration:DUR, fill:'both'})
-      : tab.animate([
-          {clipPath:'inset(0 100% 0 0)', offset:0}, {clipPath:'inset(0 100% 0 0)', offset:.3, easing:sm}, {clipPath:'inset(0 0% 0 0)', offset:.42}, {clipPath:'inset(0 0% 0 0)', offset:1}
-        ],{duration:DUR, fill:'both'}),
-    lab.animate(sameLabel
-      ? [{visibility:'hidden'},{visibility:'hidden'}]
-      : [{visibility:'visible', clipPath:'inset(0 0% 0 0)', offset:0, easing:sm}, {visibility:'visible', clipPath:'inset(0 0 0 100%)', offset:.28}, {visibility:'hidden', clipPath:'inset(0 0 0 100%)', offset:1}],
-      {duration:DUR, fill:'both'}),
-    dBg.animate([
-      {visibility:'hidden', offset:0}, {visibility:'hidden', offset:.97}, {visibility:'visible', offset:.98}, {visibility:'visible', offset:1}
-    ],{duration:DUR, fill:'both'})
-  ];
-}
-
-async function openDetail(key, animate=true){
-  if (busy || current===key) return;          // ignore clicks while a transition runs
-  if (current) closeNow();
-  busy = true; current = key;
-  returnFocus = document.activeElement;
-  card = document.querySelector(`a.card[data-detail="${key}"]`);
-  fly.innerHTML = renderProject(key);
-  fly.querySelector('[data-back]').addEventListener('click', ()=>{ location.hash = 'work'; });
-  document.documentElement.style.overflow = 'hidden';
-  const doFly = animate && !reduce && !narrow() && card && card.offsetParent;
-  detail.hidden = false; detail.scrollTop = 0;
-  if (doFly){
-    const own = folders[PROJECTS[key].work.folder];
-    folders.forEach((f,j)=>f.style.setProperty('--k', folders.length-1-j));
-    detail.hidden = true;
-    own.classList.add('lifted','tucked');                  // cards are swept down into the folder
-    work.classList.remove('rising'); work.classList.add('dropping');   // the other folders slide away
-    await wait(380);
-    detail.hidden = false; detail.scrollTop = 0;
-    play(key);                                             // identical copy takes over in the same frame
-    own.classList.add('handoff');
-    await anims[0].finished;
-  }
-  fly.querySelector('#dTitle').focus({preventScroll:true});
-  busy = false;
-}
-function closeNow(){
-  anims.forEach(a=>a.cancel()); anims = [];
-  detail.hidden = true; fly.innerHTML = ''; fly.style.cssText = '';
-  work.classList.remove('dropping','rising');
-  folders.forEach(f=>f.classList.remove('lifted','tucked','handoff'));
-  card?.classList.remove('picked'); card = null; current = null;
-  document.documentElement.style.overflow = '';
-}
-async function closeDetail(){
-  if (!current || busy) return;
-  busy = true;
-  if (anims.length && !reduce && !narrow()){
-    anims.forEach(a=>{ a.reverse(); a.updatePlaybackRate(-BACK_RATE); });
-    const back = DUR/BACK_RATE;
-    const own = folders[PROJECTS[current].work.folder];
-    folders.forEach((f,j)=>f.style.setProperty('--k', j));
-    await wait(back*.45);
-    work.classList.add('rising'); work.classList.remove('dropping');   // the other folders come back up
-    await anims[0].finished;
-    own.classList.remove('handoff');                       // the real folder is back exactly where the copy landed
-    anims.forEach(a=>a.cancel()); anims = []; detail.hidden = true;
-    await wait(30);
-    own.classList.remove('tucked');                        // its cards come back out
-    await wait(450);
-    own.classList.remove('lifted');
-  }
-  const f = returnFocus; closeNow(); f?.focus?.({preventScroll:true});
-  busy = false;
-}
-function route(animate){
-  const key = location.hash.slice(1);
-  if (PROJECTS[key]) openDetail(key, animate);
-  else if (current){
-    const target = location.hash && document.querySelector(location.hash);
-    closeDetail().then(()=>{ if (target && target.id!=='work' && target.classList.contains('sec')) target.scrollIntoView({behavior: reduce?'auto':'smooth'}); });
-  }
-}
-addEventListener('hashchange', ()=>route(true));
-addEventListener('keydown', e=>{ if (e.key==='Escape' && current) location.hash = 'work'; });
-route(false);
-
-/* ---- About: photo tilt ---- */
-const photo = document.getElementById('photo');
-if(!reduce && matchMedia('(hover:hover)').matches){
-  photo.addEventListener('pointermove',e=>{
-    const r = photo.getBoundingClientRect();
-    photo.style.setProperty('--ry', ((e.clientX-r.left)/r.width - .5)*14 + 'deg');
-    photo.style.setProperty('--rx', -((e.clientY-r.top)/r.height - .5)*14 + 'deg');
-  });
-  photo.addEventListener('pointerleave',()=>{ photo.style.setProperty('--ry','0deg'); photo.style.setProperty('--rx','0deg'); });
-}
-
-/* ---- Reveal + nav state ---- */
-const rv = document.querySelectorAll('.rv:not(.in)');
-const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.15});
-rv.forEach((el,i)=>{ el.style.transitionDelay = (el.closest('#about') ? (i%8)*70 : 0)+'ms'; io.observe(el); });
-setTimeout(()=>rv.forEach(el=>el.classList.add('in')), 6000);
-
-const links = [...document.querySelectorAll('.nav a')];
-const nio = new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting) links.forEach(a=>a.setAttribute('aria-current', a.hash==='#'+e.target.id));
-}),{rootMargin:'-45% 0px -45% 0px'});
-document.querySelectorAll('.sec').forEach(s=>nio.observe(s));
-</script>
+<!-- GSAP + ScrollTrigger + Lenis (pinned versions) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
